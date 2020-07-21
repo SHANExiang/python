@@ -113,6 +113,76 @@ def test_copy():
           'tuple4[4]内存地址==%s' % (id(tuple3), id(tuple4), id(tuple3[4]),
                                  id(tuple4[4])))
 
+# test_copy()
 
-if __name__ == '__main__':
-    test_copy()
+
+# 闭包
+# 调用func的时候就产生了闭包（inner_func+name），这意味着当func声明周期结束的时候，name
+# 这个变量依旧存在，因为它被闭包引用了，所以不会被回收。
+# 所谓闭包---在函数内部定义一个函数，并且这个函数用到了外部函数的变量，那么讲这个函数与用到
+# 的一些变量称为闭包。
+def func(name):
+    def inner_func(age):
+        print('%s的年龄为%s' % (name, age))
+    return inner_func
+#      f = func('shane')
+#      f(20)
+#      print('函数inner_func的内部地址为%s' % f)
+
+
+# 装饰器
+# 1. 不带参数的装饰器
+def wrap1(func):
+    def inner_func(*args, **kwargs):
+        print('I\'m inner_func', args, kwargs)
+        func()
+    return inner_func
+
+
+# 也就是说我们在进行不带参数的装饰器的调用时，相当于把下面的函数名当做参数传给了@后面的函数
+@wrap1   # 等价于 func1 = wrap(func1),
+def func1():
+    print('I\'m func1...')
+# func1()
+# func1('dong', 'xiang', name='dongxiang')
+
+
+# 2. 带参数的装饰器
+def wrap2(type):
+    def outer(func):
+        def inner(*args, **kwargs):
+            if type == 'apple':
+                print('apple phone!!!')
+                func(*args, **kwargs)
+            else:
+                print('other phone!!!')
+        return inner
+    return outer
+
+
+# 如果要返回函数的话，带参数的装饰器就要写三层内嵌函数。
+# 等价于func2 = wrap2('apple')(func)
+@wrap2('apple')
+def func2():
+    print('func2....')
+# func2()
+
+
+# random模块使用
+import random
+# 生成一个范围内的随机数
+print(random.randrange(1, 10))   # 左开右闭,不包括10
+print(random.randrange(1, 20, 3))   # 1-20之间，步长为3的数字
+print(random.randint(1, 10))   # 1-10之间的整数，包括10
+print(random.choice('dongxiang1243'))   # 在一个字符串中间选择一个
+print(random.choice((1, 2, 34, '34')))   # 返回一个给定数据集合的随意数据
+print(random.sample('shanedfgv2335', 4))   # 返回给定数量的数据集合的列表
+print(random.sample([2, 34, '34', 3], 4))   # 返回给定数量的数据集合的列表
+l = [3, 4, 5, 6, 7]
+random.shuffle(l)
+print(l)     # 打乱数据集合
+
+
+
+# if __name__ == '__main__':
+#     pass
