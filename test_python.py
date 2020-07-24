@@ -233,12 +233,103 @@ def function():
     print('test sys.modules')
 
 
-print(sys.modules[__name__])   # 此python文件中的module 'main'
-print(function.__name__)    # 函数名
-function_obj = getattr(sys.modules[__name__], function.__name__)# 获得此函数名对象
-function_obj()
+# print(sys.modules[__name__])   # 此python文件中的module 'main'
+# print(function.__name__)    # 函数名
+# function_obj = getattr(sys.modules[__name__], function.__name__)# 获得此函数名对象
+# function_obj()
+
+
+# 互斥锁                      **************************------------------------
+import json
+import os
+import time
+from multiprocessing import Process, Lock, Queue
 
 
 
-# if __name__ == '__main__':
-#     pass
+def remain(ticket_name, ticket_buyer):
+    time.sleep(1)
+    with open('tickets.json', 'r', encoding='utf-8') as f:
+        tickets_dict = json.load(f)
+        tickets_remain = tickets_dict.get(ticket_name)
+        if tickets_remain <= 0:
+            print('<%s>查看%s 余票不足...' % (ticket_buyer, ticket_name))
+        else:
+            print('<%s>查看remain tickets numbers==%s' % (ticket_buyer,
+                                                        tickets_remain))
+
+
+def buy_tickets(ticket_name, ticket_buyer):
+    time.sleep(1)
+    with open('tickets.json', 'r', encoding='utf-8') as f:
+        tickets_dict = json.load(f)
+        tickets_remain = tickets_dict.get(ticket_name)
+    tickets_remain -= 1
+    with open('tickets.json', 'w', encoding='utf-8') as f:
+        if tickets_remain >= 0:
+            tickets_dict = {'%s' % ticket_name : tickets_remain}
+            json.dump(tickets_dict, f, ensure_ascii=False)
+            print('<%s>购买到票' % ticket_buyer)
+        else:
+            tickets_dict = {'%s' % ticket_name: 0}
+            json.dump(tickets_dict, f, ensure_ascii=False)
+            print('<%s>未购买到票' % ticket_buyer)
+
+
+def task(ticket_name, ticket_buyer, mutex):
+    remain(ticket_name, ticket_buyer)
+    mutex.acquire()
+    buy_tickets(ticket_name, ticket_buyer)
+    mutex.release()
+
+
+# with open('tickets.json', 'w', encoding='utf-8') as f:
+#     json.dump({'速度与激情7': 4}, f, ensure_ascii=False)
+# file_new = open('tickets.json', 'r', encoding='utf-8')
+# print(file_new.read())
+# file_new.close()
+
+# 执行代码  只能在__name__=='__main__'中执行
+#     mutex = Lock()
+#     for i in range(4):
+#         p = Process(target=task, args=('速度与激情7', '学生%s' % (i + 1), mutex))
+#         p.start()
+
+
+def producer(queue):
+    for i in range(4):
+        res = '商品%s' % (i + 1)
+        time.sleep(0.5)
+        print('生产者%s生产%s' % (os.getpid(), res))
+        queue.put(res)
+
+
+def consumer(queue):
+    while True:
+        res = queue.get()
+        if not res:
+            break
+        time.sleep(1)
+        print('消费者%s消费了%s' % (os.getpid(), res))
+
+# 执行代码
+#     q = Queue()
+#     p1 = Process(target=producer, args=(q, ), name='p1')
+#     p2 = Process(target=producer, args=(q, ), name='p2')
+#     c1 = Process(target=consumer, args=(q, ), name='c1')
+#     c2 = Process(target=consumer, args=(q, ), name='c2')
+#     p1.start()
+#     p2.start()
+#     c1.start()
+#     c2.start()
+#     p1.join()
+#     p2.join()
+    # 以下put两个None是为了让两个消费者停止消费，跳出循环
+    # q.put(None)
+    # q.put(None)
+
+
+if __name__ == '__main__':
+    pass
+
+
