@@ -246,7 +246,6 @@ import time
 from multiprocessing import Process, Lock, Queue
 
 
-
 def remain(ticket_name, ticket_buyer):
     time.sleep(1)
     with open('tickets.json', 'r', encoding='utf-8') as f:
@@ -329,7 +328,32 @@ def consumer(queue):
     # q.put(None)
 
 
+# 线程属性和方法               **************************------------------------
+import threading
+from threading import current_thread, enumerate, active_count
+print(current_thread().getName())
+print(active_count())
+print(enumerate())
+
+
+def worker():
+    print('os.get_pid==%s' % os.getpid())
+    print('the thread is working...')
+    print(current_thread().getName(), 'is in worker')
+    print(current_thread().is_alive())
+
+# 执行过程
+    # thread1 = threading.Thread(target=worker, name='thread1')
+    # thread1.start()
+    # thread1.join()
+    # print(thread1.getName())
+    # print(thread1.is_alive())
+    # thread1.setName('thread1_to_update')
+    # print(thread1.getName())
+
+
 if __name__ == '__main__':
     pass
+
 
 
