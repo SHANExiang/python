@@ -331,9 +331,9 @@ def consumer(queue):
 # 线程属性和方法               **************************------------------------
 import threading
 from threading import current_thread, enumerate, active_count
-print(current_thread().getName())
-print(active_count())
-print(enumerate())
+# print(current_thread().getName())
+# print(active_count())
+# print(enumerate())
 
 
 def worker():
@@ -351,9 +351,64 @@ def worker():
     # thread1.setName('thread1_to_update')
     # print(thread1.getName())
 
+# python几种加密方式           **************************------------------------
+
+
+# base64
+import base64
+
+
+def test_base64():
+    encode_str = base64.b64encode(b'dongxiang is a genius!!!')
+    print('encode_str==%s' % encode_str)
+    decode_str = base64.b64decode(encode_str)
+    print('decode_str==%s' % decode_str)
+
+# 执行代码
+#     test_base64()
+
+# md5
+import hashlib
+
+
+def test_md5(string):
+    h1 = hashlib.md5()
+    # 若写法为hl.update(str)  报错为： Unicode-objects must be encoded before hashing
+    # 此处必须声明encode
+    h1.update(string.encode('utf-8'))
+    print('string 加密前==%s' % string)
+    print('string 加密后==%s' % h1.hexdigest())
+
+# 执行代码
+#     test_md5('dong xiang is a genius!!!')
+
+# AES
+from Cryptodome.Cipher import AES
+from Cryptodome import Random
+from binascii import b2a_hex
+
+
+def test_AES(string):
+    key = b'xiangdong1234567'
+    iv = Random.new().read(AES.block_size)
+    mycipher = AES.new(key, AES.MODE_CFB, iv)
+    encrypt = mycipher.encrypt(string.encode())
+    cipher_text = iv + encrypt
+    mydecrypt = AES.new(key, AES.MODE_CFB, cipher_text[:16])
+    decrypt_text = mydecrypt.decrypt(cipher_text[16:])
+    print('密匙是==%s' % key)
+    print('iv==%s, len(iv)==%s' % (iv, len(iv)))
+    print('encrypt==%s' % b2a_hex(encrypt).decode())
+    print('加密后数据为==%s' % b2a_hex(cipher_text[16:]).decode())
+    print('解密后数据为==%s' % decrypt_text.decode())
+
+# 执行代码
+#     test_AES('dong xiang 0816')
+
 
 if __name__ == '__main__':
     pass
+
 
 
 
