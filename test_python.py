@@ -406,10 +406,20 @@ def test_AES(string):
 # 执行代码
 #     test_AES('dong xiang 0816')
 
+# iter方法读取文件的例子        **************************------------------------
+
+
+def iter_file(file, size=1024):
+    with open(file, 'r') as f:
+        for data in iter(lambda: f.read(size), b''):
+            yield data
+
+
+def test_iter():
+    for row in iter_file('test.txt'):
+        print(row)
+
+
 
 if __name__ == '__main__':
     pass
-
-
-
-
