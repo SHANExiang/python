@@ -29,7 +29,38 @@ def create_class(name):
         return Bar
 
 
-Class = create_class('foo')
-print(Class) # <class '__main__.create_class.<locals>.Foo'>  函数返回的是类
+# Class = create_class('foo')
+# print(Class) # <class '__main__.create_class.<locals>.Foo'>  函数返回的是类
 # <__main__.create_class.<locals>.Foo object at 0x000001BFEB9CDEE0>
-print(Class()) # 通过这个类创建实例
+# print(Class()) # 通过这个类创建实例
+
+
+# type动态创建类
+
+name = 'dong'
+age = 20
+print(name.__class__)  # <class 'str'>
+print(age.__class__) # <class 'int'>
+
+
+def foo():
+    pass
+
+
+print(foo.__class__)  # <class 'function'>
+
+
+class Bar():
+    pass
+
+
+b = Bar()
+print(b.__class__)  # <class '__main__.Bar'>  # 表示一个类
+print(b.__class__()) # <__main__.Bar object at 0x0000029BE5D4F370> 又成为一个实例了
+print(name.__class__.__class__) # <class 'type'>
+print(age.__class__.__class__) # <class 'type'>
+print(foo.__class__.__class__) # <class 'type'>
+print(b.__class__.__class__) # <class 'type'>
+
+
+
