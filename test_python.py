@@ -420,6 +420,15 @@ def test_iter():
         print(row)
 
 
+def timestamp_to_date():
+    import datetime
+    # 时间戳转时间
+    d = datetime.datetime.fromtimestamp(23343555)
+    print(d) # 1970-09-28 12:19:15
+    # 时间字符串格式化
+    d = d.strftime("%Y-%m-%d %H-%M-%S")
+    print(d) # 1970-09-28 12-19-15
+
 
 if __name__ == '__main__':
-    pass
+    timestamp_to_date()
