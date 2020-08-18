@@ -429,6 +429,18 @@ def timestamp_to_date():
     d = d.strftime("%Y-%m-%d %H-%M-%S")
     print(d) # 1970-09-28 12-19-15
 
+# eval使用                   **************************------------------------
+
+
+print(eval('1 + 2'), type(eval('1 + 2')))  # 3, <class 'int'>
+print(eval('[1, 2, 3]'), type(eval('[1, 2, 3]'))) # [1, 2, 3] <class 'list'>
+print(eval('1' + '2'))
+
+
+import ast
+my_list = ast.literal_eval('[1, 2, 3]')  # [1, 2, 3] <class 'list'>
+print(my_list, type(my_list))
+
 
 if __name__ == '__main__':
-    timestamp_to_date()
+    pass

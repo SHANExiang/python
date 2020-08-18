@@ -67,4 +67,11 @@ dict1 = dict()
 # {'k': '1', 'k1': '2', 'k2': '3', 'k3': '4'}
 
 # 公差为11的等差数列
-print([x * 11 for x in range(10)])
+# print([x * 11 for x in range(10)])
+
+# 字典和集合解析
+my_dict = {i: i * i for i in range(10)}
+my_set = {i * i for i in range(10)}
+print('dict==%s, set==%s' % (my_dict, my_set))
+# dict=={0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81},
+# set=={0, 1, 64, 4, 36, 9, 16, 49, 81, 25}
