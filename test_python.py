@@ -406,7 +406,7 @@ def test_AES(string):
 # 执行代码
 #     test_AES('dong xiang 0816')
 
-# iter方法读取文件的例子        **************************------------------------
+# iter方法读取文件的例子       **************************------------------------
 
 
 def iter_file(file, size=1024):
@@ -432,15 +432,77 @@ def timestamp_to_date():
 # eval使用                   **************************------------------------
 
 
-print(eval('1 + 2'), type(eval('1 + 2')))  # 3, <class 'int'>
-print(eval('[1, 2, 3]'), type(eval('[1, 2, 3]'))) # [1, 2, 3] <class 'list'>
-print(eval('1' + '2'))
+# print(eval('1 + 2'), type(eval('1 + 2')))  # 3, <class 'int'>
+# print(eval('[1, 2, 3]'), type(eval('[1, 2, 3]'))) # [1, 2, 3] <class 'list'>
+# print(eval('1' + '2'))
 
 
 import ast
-my_list = ast.literal_eval('[1, 2, 3]')  # [1, 2, 3] <class 'list'>
-print(my_list, type(my_list))
+# my_list = ast.literal_eval('[1, 2, 3]')  # [1, 2, 3] <class 'list'>
+# print(my_list, type(my_list))
 
+
+# 函数以及元组解包             **************************------------------------
+def unpack(x, y):
+    print('x==%s, y==%s' % (x, y))
+
+
+# lis1 = [1, 2]
+# unpack(*lis1)
+# dic = {'x': 'dong', 'y': 20}
+# unpack(**dic)
+
+# output:
+# x==1, y==2
+# x==dong, y==20
+
+a, b, *c = range(6)
+# print('a==%s, b==%s, c==%s' % (a, b, c))
+# a==0, b==1, c==[2, 3, 4, 5]
+x, *y, z = range(5)
+# print('x==%s, y==%s, z==%s' % (x, y, z))
+# x==0, y==[1, 2, 3], z==4
+
+# 函数默认参数                 **************************------------------------
+
+
+def foo(x=[]):
+    x.append(1)
+    print(x)
+
+
+# foo() # [1]
+# foo() # [1, 1]
+# 更安全的做法
+
+
+def foo_safe(x=None):
+    if x is None:
+        x = []
+    x.append(1)
+    print(x)
+
+
+# foo_safe() # [1]
+# foo_safe() # [1]
+
+
+# 带关键字的格式化             **************************------------------------
+
+# print('Your name %(name)s sounds nice!!' % {'name': 'dong'})
+# Your name dong sounds nice!!
+# print('My age %(age)i years old.' % {'age': 20})
+# My age 20 years old.
+# print('Hello {name}!!!'.format(name='James'))
+# hello James!!!
+
+# 带关键字的格式化             **************************------------------------
+# print(isinstance(1, (int, float))) # 判断1是不是int类型或者float类型
+# True
+# print(isinstance(1.3, (float, int)))
+# True
+# print(isinstance('2.5', (str, int)))
+# True
 
 if __name__ == '__main__':
     pass
