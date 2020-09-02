@@ -10,4 +10,5 @@ print(s1 - s2) # s1中有s2中没有的元素
 print(s2 - s1) # s2中有s1中没有的元素
 print(s1 & s2) # {2, 4}   s1与s2的交集
 print(s1 ^ s2) # {1, 3, 8, 10, 11, 15}  两者总和去掉交集元素
+print(s1.union(s2))
 
