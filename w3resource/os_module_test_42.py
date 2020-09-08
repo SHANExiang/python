@@ -1,5 +1,6 @@
 import os
 import struct
+import sys
 
 
 # Write a Python program to determine whether a Python
@@ -58,6 +59,15 @@ def get_environment_variables():
     print(os.environ['OS'])
 
 
+def get_absolute_file_path(path_fname):
+    return os.path.abspath(path_fname)
+
+
+def get_create_time_or_modify_time_of_file():
+    import time
+    print('last modified:%s' % time.ctime(os.path.getmtime('os_module_test_42.py')))
+    print('create time:%s' % time.ctime(os.path.getctime('os_module_test_42.py')))
+
 if __name__ == '__main__':
     # print(get_os_mode_32bit_or_64bit())   # 64
 
@@ -78,21 +88,30 @@ if __name__ == '__main__':
     # import getpass
     # print(getpass.getuser())  # Administrator
 
-    import socket
-    print(socket.gethostname())  # PC201910292213
-    print(socket.gethostbyname_ex(socket.gethostname()))  # 获得当前主机的所有ip列表
+    # import socket
+    # print(socket.gethostname())  # PC201910292213
+    # print(socket.gethostbyname_ex(socket.gethostname()))  # 获得当前主机的所有ip列表
     # ('PC201910292213', [], ['172.30.64.1', '192.168.176.17', '192.168.73.1', '192.168.49.1', '192.168.31.58'])
-    print(socket.gethostbyname(socket.gethostname()))  # 192.168.31.58
-    print(socket.gethostbyname_ex(socket.gethostname())[2])
+    # print(socket.gethostbyname(socket.gethostname()))  # 192.168.31.58
+    # print(socket.gethostbyname_ex(socket.gethostname())[2])
     # ['172.30.64.1', '192.168.176.17', '192.168.73.1', '192.168.49.1', '192.168.31.58']
-    lis = [ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1]
-    print(lis) # ['172.30.64.1']
-    print([socket.socket(socket.AF_INET,socket.SOCK_DGRAM)])
-    for s in [socket.socket(socket.AF_INET,socket.SOCK_DGRAM)]:
-        print(s)
+    # lis = [ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1]
+    # print(lis) # ['172.30.64.1']
+    # print([socket.socket(socket.AF_INET,socket.SOCK_DGRAM)])
+    # for s in [socket.socket(socket.AF_INET,socket.SOCK_DGRAM)]:
+    #     print(s)
         # < socket.socket fd = 768, family = AddressFamily.AF_INET, type = SocketKind.SOCK_DGRAM, proto = 0 >
-        print((s.connect(('8.8.8.8', 53)),s.getsockname()[0], s.close()))
+        # print((s.connect(('8.8.8.8', 53)),s.getsockname()[0], s.close()))
         # (None, '192.168.31.58', None)
 
-    print([l for l in (lis, [[(s.connect(('8.8.8.8', 53)),s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET,socket.SOCK_DGRAM)]][0][1]]) if l][0][0])
+    # print([l for l in (lis, [[(s.connect(('8.8.8.8', 53)),s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET,socket.SOCK_DGRAM)]][0][1]]) if l][0][0])
     # 172.30.64.1
+
+    # print(get_absolute_file_path('os_module_test_42.py'))
+    # F:\projects\python\w3resource\os_module_test_42.py
+
+    get_create_time_or_modify_time_of_file()
+    # last modified:Tue Sep  8 22:54:09 2020
+    # create time:Thu Sep  3 21:53:40 2020
+
+
