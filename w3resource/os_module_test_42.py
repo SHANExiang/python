@@ -89,6 +89,31 @@ def test_whether_the_system_is_a_big_endian_platform_or_little_endian_platform()
 # Little-endian platform.
 
 
+def test_get_object_size_in_bytes():
+    st1 = 'one'
+    st2 = 'two'
+    st3 = 'three'
+    print('st1 is %s, ' % st1, "it\'s size %s bytes" % sys.getsizeof(st1))
+    print('st1 is %s, ' % st2, "it\'s size %s bytes" % sys.getsizeof(st2))
+    print('st1 is %s, ' % st3, "it\'s size %s bytes" % sys.getsizeof(st3))
+
+
+# test_get_object_size_in_bytes()
+# output:
+# st1 is one,  it's size 52 bytes
+# st1 is two,  it's size 52 bytes
+# st1 is three,  it's size 54 bytes
+
+
+def test_getrecursionlimit():
+    print('递归深度限制为==%s' % sys.getrecursionlimit())
+
+
+# test_getrecursionlimit()
+# output:
+# 递归深度限制为==1000
+
+
 if __name__ == '__main__':
     # print(get_os_mode_32bit_or_64bit())   # 64
 
