@@ -68,6 +68,27 @@ def get_create_time_or_modify_time_of_file():
     print('last modified:%s' % time.ctime(os.path.getmtime('os_module_test_42.py')))
     print('create time:%s' % time.ctime(os.path.getctime('os_module_test_42.py')))
 
+
+def get_copyright_info():
+    import sys
+    print(sys.copyright)
+
+
+def test_whether_the_system_is_a_big_endian_platform_or_little_endian_platform():
+    import sys
+    print(sys.byteorder)
+    if sys.byteorder == 'little':
+        print('Little-endian platform.')
+    else:
+        print("Big-endian platform.")
+
+
+# test_whether_the_system_is_a_big_endian_platform_or_little_endian_platform()
+# output:
+# little
+# Little-endian platform.
+
+
 if __name__ == '__main__':
     # print(get_os_mode_32bit_or_64bit())   # 64
 
@@ -110,8 +131,16 @@ if __name__ == '__main__':
     # print(get_absolute_file_path('os_module_test_42.py'))
     # F:\projects\python\w3resource\os_module_test_42.py
 
-    get_create_time_or_modify_time_of_file()
+    # get_create_time_or_modify_time_of_file()
     # last modified:Tue Sep  8 22:54:09 2020
     # create time:Thu Sep  3 21:53:40 2020
-
-
+    # get_copyright_info()
+    # Copyright (c) 2001-2019 Python Software Foundation.
+    # All Rights Reserved.
+    # Copyright (c) 2000 BeOpen.com.
+    # All Rights Reserved.
+    # Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+    # All Rights Reserved.
+    # Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+    # All Rights Reserved.
+    pass
