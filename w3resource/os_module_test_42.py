@@ -114,6 +114,16 @@ def test_getrecursionlimit():
 # 递归深度限制为==1000
 
 
+def test_clear_screen_or_terminal():
+    import os
+    import time
+    os.system('cls')
+    time.sleep(2)
+
+
+test_clear_screen_or_terminal()
+
+
 if __name__ == '__main__':
     # print(get_os_mode_32bit_or_64bit())   # 64
 
