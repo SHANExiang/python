@@ -121,7 +121,56 @@ def test_clear_screen_or_terminal():
     time.sleep(2)
 
 
-test_clear_screen_or_terminal()
+# test_clear_screen_or_terminal()
+
+
+def test_os_path():
+    import os.path
+
+    for file in [__file__, os.path.dirname(__file__), '/', './broken_link']:
+        print('File        :', file)
+        print('Absolute    :', os.path.isabs(file))
+        print('Is File?    :', os.path.isfile(file))
+        print('Is Dir?     :', os.path.isdir(file))
+        print('Is Link?    :', os.path.islink(file))
+        print('Exists?     :', os.path.exists(file))
+        print('Link Exists?:', os.path.lexists(file))
+
+
+# test_os_path()
+# output:
+# File        : F:/projects/python/w3resource/os_module_test_42.py
+# Absolute    : True
+# Is File?    : True
+# Is Dir?     : False
+# Is Link?    : False
+# Exists?     : True
+# Link Exists?: True
+# File        : F:/projects/python/w3resource
+# Absolute    : True
+# Is File?    : False
+# Is Dir?     : True
+# Is Link?    : False
+# Exists?     : True
+# Link Exists?: True
+# File        : /
+# Absolute    : True
+# Is File?    : False
+# Is Dir?     : True
+# Is Link?    : False
+# Exists?     : True
+# Link Exists?: True
+# File        : ./broken_link
+# Absolute    : False
+# Is File?    : False
+# Is Dir?     : False
+# Is Link?    : False
+# Exists?     : False
+# Link Exists?: False
+
+print(os.listdir(os.path.dirname(__file__)))
+import glob
+print(glob.glob("*"))
 
 
 if __name__ == '__main__':
