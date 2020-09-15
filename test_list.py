@@ -33,4 +33,45 @@ def remove_first_item_from_specified_list():
 
 # ****************************************************************************
 import builtins
-print(builtins.__dict__, len(builtins.__dict__), sep='\n')
+# print(builtins.__dict__, len(builtins.__dict__), sep='\n')
+
+
+# ****************************************************************************
+'''
+Write a Python program to create a bytearray from a list.
+'''
+
+
+def test_list_to_bytearray():
+    lis = [34, 36, 29, 10]
+    array = bytearray(lis)
+    for x in array:
+        print(x, end='\n')
+
+# test_list_to_bytearray()
+# 34
+# 36
+# 29
+# 10
+
+
+'''
+Write a Python program to split a variable length string into variables.
+'''
+
+
+def test_split_a_variable_length_string_into_variables():
+   lis = ['a', 'b', 'c']
+   lis1 = lis + [None]*3
+   print(lis1, len(lis1)) # ['a', 'b', 'c', None, None, None] 6
+   x, y, z = lis1[:3]
+   print(x, y, z, type(x))
+   var_list = [100, 20.25]
+   x, y = (var_list + [None] * 2)[:2]
+   print(x, y)
+
+
+test_split_a_variable_length_string_into_variables()
+# ['a', 'b', 'c', None, None, None] 6
+# a b c <class 'str'>
+# 100 20.25

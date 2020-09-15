@@ -504,5 +504,56 @@ def foo_safe(x=None):
 # print(isinstance('2.5', (str, int)))
 # True
 
+
+'''
+Write a Python program to determine whether variable is defined or not.
+'''
+
+
+def test_determine_variable_is_defined():
+    try:
+        x = 1
+    except NameError:
+        print('variable x is not defined...')
+    else:
+        print('variable x defined...')
+
+    try:
+        y
+    except NameError:
+        print('variable y is not defined...')
+    else:
+        print("variable y is defined...")
+
+
+# test_determine_variable_is_defined()
+# variable x defined...
+# variable y is defined...
+
+
+'''
+Write a Python program to empty a variable without destroying it.
+Sample data: n=20
+d = {"x":200}
+Expected Output: 0
+{}
+'''
+
+
+def test_empty_variable_without_destroying():
+    x = 90
+    y = [2, 3, 5]
+    z = {12, '23', b'78'}
+    print(type(x)(), x)
+    print(type(y)(), y)
+    print(type(z)(), z)
+
+
+# test_empty_variable_without_destroying()
+# 0 90
+# [] [2, 3, 5]
+# set() {b'78', 12, '23'}
+
+
 if __name__ == '__main__':
     pass
