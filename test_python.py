@@ -555,5 +555,22 @@ def test_empty_variable_without_destroying():
 # set() {b'78', 12, '23'}
 
 
+'''
+Write a Python program to convert true to 1 and false to 0.
+'''
+
+
+def test_true_to_1_false_to_0():
+    x = 'true'
+    print(int(x == 'true'))
+    y = 'false'
+    print(int(y == 'true'))
+
+
+# test_true_to_1_false_to_0()
+# 1
+# 0
+
+
 if __name__ == '__main__':
     pass

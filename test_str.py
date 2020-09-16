@@ -74,4 +74,87 @@ def test_add_trailing_and_leading_zeroes_to_a_string():
 # add leading zeroes--- ****dgfr45sfry4
 
 
-print('\"sdogong\"')
+# print('\"sdogong\"')
+
+
+'''
+Write a Python program to create the combinations of 3 digit combo.
+'''
+
+
+def test_combination_3_digit():
+    nums = []
+    for x in range(15):
+        num = str(x).zfill(3)
+        nums.append(num)
+    return nums
+
+
+# print(test_combination_3_digit())
+
+
+'''
+Write a Python program to print a long text, convert the string to a list and 
+print all the words and their frequencies.
+'''
+text = '''
+    We hold these truths to be self-evident, that all men are created equal, that they are endowed by their
+    Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness.
+    
+    This has been called "one of the best-known sentences in the English language", containing "the most potent
+    and consequential words in American history". The passage came to represent a moral standard to which
+    the United States should strive. This view was notably promoted by Abraham Lincoln, who considered the
+    Declaration to be the foundation of his political philosophy and argued that it is a statement of principles
+    through which the United States Constitution should be interpreted.
+    '''
+
+
+def test_get_freq():
+    words_list = text.split()
+    word_freq = [words_list.count(x) for x in words_list]
+    print('list:\n{}'.format(str(words_list)))
+    print('pairs:\n{}'.format(str(list(zip(words_list, word_freq)))))
+
+
+test_get_freq()
+# list:
+# ['We', 'hold', 'these', 'truths', 'to', 'be', 'self-evident,', 'that',
+# 'all', 'men', 'are', 'created', 'equal,', 'that', 'they', 'are', 'endowed',
+# 'by', 'their', 'Creator', 'with', 'certain', 'unalienable', 'Rights,',
+# 'that', 'among', 'these', 'are', 'Life,', 'Liberty', 'and', 'the',
+# 'pursuit', 'of', 'Happiness.', 'This', 'has', 'been', 'called', '"one',
+# 'of', 'the', 'best-known', 'sentences', 'in', 'the', 'English',
+# 'language",', 'containing', '"the', 'most', 'potent', 'and',
+# 'consequential', 'words', 'in', 'American', 'history".', 'The', 'passage',
+# 'came', 'to', 'represent', 'a', 'moral', 'standard', 'to', 'which', 'the',
+# 'United', 'States', 'should', 'strive.', 'This', 'view', 'was', 'notably',
+# 'promoted', 'by', 'Abraham', 'Lincoln,', 'who', 'considered', 'the',
+# 'Declaration', 'to', 'be', 'the', 'foundation', 'of', 'his', 'political',
+# 'philosophy', 'and', 'argued', 'that', 'it', 'is', 'a', 'statement', 'of',
+# 'principles', 'through', 'which', 'the', 'United', 'States', 'Constitution',
+# 'should', 'be', 'interpreted.']
+# pairs:
+# [('We', 1), ('hold', 1), ('these', 2), ('truths', 1), ('to', 4), ('be', 3),
+# ('self-evident,', 1), ('that', 4), ('all', 1), ('men', 1), ('are', 3),
+# ('created', 1), ('equal,', 1), ('that', 4), ('they', 1), ('are', 3),
+# ('endowed', 1), ('by', 2), ('their', 1), ('Creator', 1), ('with', 1),
+# ('certain', 1), ('unalienable', 1), ('Rights,', 1), ('that', 4),
+# ('among', 1), ('these', 2), ('are', 3), ('Life,', 1), ('Liberty', 1),
+# ('and', 3), ('the', 7), ('pursuit', 1), ('of', 4), ('Happiness.', 1),
+# ('This', 2), ('has', 1), ('been', 1), ('called', 1), ('"one', 1), ('of', 4),
+# ('the', 7), ('best-known', 1), ('sentences', 1), ('in', 2), ('the', 7),
+# ('English', 1), ('language",', 1), ('containing', 1), ('"the', 1),
+# ('most', 1), ('potent', 1), ('and', 3), ('consequential', 1), ('words', 1),
+# ('in', 2), ('American', 1), ('history".', 1), ('The', 1), ('passage', 1),
+# ('came', 1), ('to', 4), ('represent', 1), ('a', 2), ('moral', 1),
+# ('standard', 1), ('to', 4), ('which', 2), ('the', 7), ('United', 2),
+# ('States', 2), ('should', 2), ('strive.', 1), ('This', 2), ('view', 1),
+# ('was', 1), ('notably', 1), ('promoted', 1), ('by', 2), ('Abraham', 1),
+# ('Lincoln,', 1), ('who', 1), ('considered', 1), ('the', 7),
+# ('Declaration', 1), ('to', 4), ('be', 3), ('the', 7), ('foundation', 1),
+# ('of', 4), ('his', 1), ('political', 1), ('philosophy', 1), ('and', 3),
+# ('argued', 1), ('that', 4), ('it', 1), ('is', 1), ('a', 2),
+# ('statement', 1), ('of', 4), ('principles', 1), ('through', 1),
+# ('which', 2), ('the', 7), ('United', 2), ('States', 2), ('Constitution', 1),
+# ('should', 2), ('be', 3), ('interpreted.', 1)]
+

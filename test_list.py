@@ -71,7 +71,33 @@ def test_split_a_variable_length_string_into_variables():
    print(x, y)
 
 
-test_split_a_variable_length_string_into_variables()
+# test_split_a_variable_length_string_into_variables()
 # ['a', 'b', 'c', None, None, None] 6
 # a b c <class 'str'>
 # 100 20.25
+
+
+'''
+Write a Python program to remove and print every third number from a list of
+ numbers until the list becomes empty.
+'''
+
+
+def test_remove_every_third_number():
+    lis = [23, 25, 1, 123, 90, 56]
+    position = 3 - 1
+    index = 0
+    len_lis = len(lis)
+    while len_lis > 0:
+        index = (position + index) % len_lis
+        print(lis.pop(index))
+        len_lis -= 1
+
+
+test_remove_every_third_number()
+# 1
+# 56
+# 123
+# 25
+# 90
+# 23

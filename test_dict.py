@@ -72,6 +72,21 @@ dict1 = dict()
 # 字典和集合解析
 my_dict = {i: i * i for i in range(10)}
 my_set = {i * i for i in range(10)}
-print('dict==%s, set==%s' % (my_dict, my_set))
+# print('dict==%s, set==%s' % (my_dict, my_set))
 # dict=={0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81},
 # set=={0, 1, 64, 4, 36, 9, 16, 49, 81, 25}
+
+# ****************************************************************************
+'''
+Write a Python program to extract single key-value pair of a dictionary in variables.
+'''
+
+
+def test_items():
+    dic11 = {'name': 'dong123'}
+    (x, y), = dic11.items()
+    print(x, y)
+
+
+test_items()
+# name dong123
