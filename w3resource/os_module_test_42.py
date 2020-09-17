@@ -168,9 +168,37 @@ def test_os_path():
 # Exists?     : False
 # Link Exists?: False
 
-print(os.listdir(os.path.dirname(__file__)))
+# print(os.listdir(os.path.dirname(__file__)))
 import glob
-print(glob.glob("*"))
+# print(glob.glob("*"))
+
+
+import platform as pl
+
+
+def test_list_os_profile():
+    os_profile = [
+        'architecture',
+        'linux_distribution',
+        'mac_ver',
+        'machine',
+        'node',
+        'platform',
+        'processor',
+        'python_build',
+        'python_compiler',
+        'python_version',
+        'release',
+        'system',
+        'uname',
+        'version',
+    ]
+    for x in os_profile:
+        if hasattr(pl, x):
+            print(x + ": " + str(getattr(pl, x)()))
+
+
+test_list_os_profile()
 
 
 if __name__ == '__main__':
