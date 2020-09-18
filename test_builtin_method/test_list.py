@@ -94,10 +94,75 @@ def test_remove_every_third_number():
         len_lis -= 1
 
 
-test_remove_every_third_number()
+# test_remove_every_third_number()
 # 1
 # 56
 # 123
 # 25
 # 90
 # 23
+
+# ****************************************************************************
+nums = [2, 3, 4, 5]
+
+
+def test_create_permutations(nums):
+    result_perms = [[]]
+    for n in nums:
+        new_perms = []
+        for perm in result_perms:
+            for i in range(len(perm) + 1):
+                new_perms.append(perm[:i] + [n] + perm[i:])
+                result_perms = new_perms
+    return result_perms
+
+
+# print(test_create_permutations(nums))
+# [[5, 4, 3, 2], [4, 5, 3, 2], [4, 3, 5, 2], [4, 3, 2, 5], [5, 3, 4, 2],
+# [3, 5, 4, 2], [3, 4, 5, 2], [3, 4, 2, 5], [5, 3, 2, 4], [3, 5, 2, 4],
+# [3, 2, 5, 4], [3, 2, 4, 5], [5, 4, 2, 3], [4, 5, 2, 3], [4, 2, 5, 3],
+# [4, 2, 3, 5], [5, 2, 4, 3], [2, 5, 4, 3], [2, 4, 5, 3], [2, 4, 3, 5],
+# [5, 2, 3, 4], [2, 5, 3, 4], [2, 3, 5, 4], [2, 3, 4, 5]]
+
+# ****************************************************************************
+string_maps = {
+"1": "abc",
+"2": "def",
+"3": "ghi",
+"4": "jkl",
+"5": "mno",
+"6": "pqrs",
+"7": "tuv",
+"8": "wxy",
+"9": "z"
+}
+
+
+def get_letter_combinations1(digit_str):
+    result = []
+    a = digit_str[0]
+    b = digit_str[1]
+    if a in string_maps and b in string_maps:
+        a_map = string_maps.get(a)
+        b_map = string_maps.get(b)
+        import itertools
+        for x in itertools.product(a_map, b_map):
+            result.append(x[0] + x[1])
+    return result
+
+
+def get_letter_combinations2(digit_str):
+    result = [""]
+    for x in digit_str:
+        temp = []
+        for s in result:
+            for char in string_maps[x]:
+                temp.append(s + char)
+        result = temp
+    return result
+
+
+# print(get_letter_combinations1("34"))
+# print(get_letter_combinations2('56'))
+# ['gj', 'gk', 'gl', 'hj', 'hk', 'hl', 'ij', 'ik', 'il']
+# ['mp', 'mq', 'mr', 'ms', 'np', 'nq', 'nr', 'ns', 'op', 'oq', 'or', 'os']
