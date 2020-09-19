@@ -116,7 +116,7 @@ def test_get_freq():
     print('pairs:\n{}'.format(str(list(zip(words_list, word_freq)))))
 
 
-test_get_freq()
+# test_get_freq()
 # list:
 # ['We', 'hold', 'these', 'truths', 'to', 'be', 'self-evident,', 'that',
 # 'all', 'men', 'are', 'created', 'equal,', 'that', 'they', 'are', 'endowed',
@@ -158,3 +158,58 @@ test_get_freq()
 # ('which', 2), ('the', 7), ('United', 2), ('States', 2), ('Constitution', 1),
 # ('should', 2), ('be', 3), ('interpreted.', 1)]
 
+# ****************************************************************************
+
+# 获取n位的数字列表，它们旋转180度还是原来的值
+def test_get_all_strobogrammatic_numbers_length_n(n, length):
+    if n == 0:
+        return ['']
+    if n == 1:
+        return ['0', '1', '8']
+    middle = test_get_all_strobogrammatic_numbers_length_n(n - 2, length)
+    result = []
+    for x in middle:
+        if n != length:
+            result.append("0" + x + "")
+        result.append('8' + x + '8')
+        result.append('1' + x + '1')
+        result.append('9' + x + '6')
+        result.append('6' + x + '9')
+    return result
+
+
+# print(test_get_all_strobogrammatic_numbers_length_n(4, 4))
+# ['808', '101', '906', '609', '8888', '1881', '9886', '6889', '8118',
+# '1111', '9116', '6119', '8968', '1961', '9966', '6969', '8698', '1691',
+# '9696', '6699']
+
+# ****************************************************************************
+
+#  n degrees of number 2 are written sequentially in a line without spaces.
+def test_get_degrees_number2_written_sequentially_in_line_no_spaces(n):
+    if n == 1:
+        return '2'
+    degrees_number_2 = str(pow(2, n))
+    res = test_get_degrees_number2_written_sequentially_in_line_no_spaces(n-1)
+    return res + degrees_number_2
+
+
+# print(test_get_degrees_number2_written_sequentially_in_line_no_spaces(7))
+
+#  find the value of n where n degrees of number 2 are written sequentially
+#  in a line without spaces.
+def test_get_n_from_degrees_number2_written_sequentially_in_line_no_spaces(ns):
+    if ns == '2':
+        return 1
+    flag = True
+    n, temp, i = 2, 2, 2
+    while flag:
+        if str(temp) in ns:
+            i += 1
+            temp = pow(n, i)
+        else:
+            flag = False
+    return i - 1
+
+
+print(test_get_n_from_degrees_number2_written_sequentially_in_line_no_spaces('2481632'))
