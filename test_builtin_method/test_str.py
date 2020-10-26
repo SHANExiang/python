@@ -212,4 +212,266 @@ def test_get_n_from_degrees_number2_written_sequentially_in_line_no_spaces(ns):
     return i - 1
 
 
-print(test_get_n_from_degrees_number2_written_sequentially_in_line_no_spaces('2481632'))
+# print(test_get_n_from_degrees_number2_written_sequentially_in_line_no_spaces('2481632'))
+
+
+# *****************************************************************************
+'''
+Write a Python program to count the number of characters (character frequency) in a string.
+'''
+
+
+def get_number_of_characters_in_string(st):
+    res = dict()
+    for ch in st:
+        if ch not in res:
+            res[ch] = 1
+        else:
+            res[ch] += 1
+    return res
+
+
+# print(get_number_of_characters_in_string('dongdgfdsdergrh'))
+# output:
+# {'d': 4, 'o': 1, 'n': 1, 'g': 3, 'f': 1, 's': 1, 'e': 1, 'r': 2, 'h': 1}
+
+# *****************************************************************************
+'''
+ Write a Python program to get a string made of the first 2 and the last 2 chars from a given a string. 
+ If the string length is less than 2, return instead of the empty string
+'''
+
+
+def get_string_made_first_and_last_2_chars(st):
+    if len(st) < 2:
+        return 'Empty String'
+    res = st[:2] + st[-2:]
+    return res
+
+
+# print(get_string_made_first_and_last_2_chars('w3resource'))
+# output:
+# w3ce
+
+'''
+Write a Python program to get a string from a given string where all occurrences of its first char have been changed to '$', except the first char itself. Go to the editor
+Sample String : 'restart'
+Expected Result : 'resta$t'
+'''
+
+
+def change_occurence_of_the_first_char_1(st):
+    l = list(st)
+    for index, ch in enumerate(l):
+        if ch == st[0] and index != 0:
+             l[index]= '$'
+    return ''.join(l)
+
+
+def change_occurence_of_the_first_char_2(st):
+    char0 = st[0]
+    st = st.replace(char0, '$')
+    res = char0 + st[1:]
+    return res
+
+
+# print(change_occurence_of_the_first_char_2('restart'))
+# output:
+
+'''
+Write a Python program to get a single string from two given strings, separated by a space and swap the first two characters of each string. Go to the editor
+Sample String : 'abc', 'xyz'
+Expected Result : 'xyc abz'
+'''
+
+
+def swap_first_two_chars(st1, st2):
+    first_two_chars_st1 = st1[:2]
+    first_two_chars_st2 = st2[:2]
+    res = first_two_chars_st2 + st1[2:] + ' ' + first_two_chars_st1 + st2[2:]
+    return res
+
+
+# print(swap_first_two_chars('abc', 'xyz'))
+# output:
+# xyc abz
+
+'''
+Write a Python program to add 'ing' at the end of a given string (length should be at least 3). 
+If the given string already ends with 'ing' then add 'ly' instead. 
+If the string length of the given string is less than 3, leave it unchanged. Go to the editor
+Sample String : 'abc'
+Expected Result : 'abcing'
+Sample String : 'string'
+Expected Result : 'stringly'
+'''
+
+
+def add_ing(st):
+    if len(st) < 3:
+        return st
+    if st[-3:] == 'ing':
+        return st + 'ly'
+    return st + 'ing'
+
+
+# print(add_ing('string'))
+# output:
+# stringly
+
+
+'''
+Write a Python program to find the first appearance of the substring 'not' and 'poor' from a given string, 
+if 'not' follows the 'poor', replace the whole 'not'...'poor' substring with 'good'. Return the resulting string. Go to the editor
+Sample String : 'The lyrics is not that poor!'
+'The lyrics is poor!'
+Expected Result : 'The lyrics is good!'
+'The lyrics is poor!'
+'''
+
+
+def change_not_poor_into_good(st):
+    index_not = st.find('not')
+    index_poor = st.find('poor')
+    if index_not < index_poor and index_not > 0 and index_poor > 0:
+        st = st.replace(st[index_not:(index_poor+4)], 'good')
+        return st
+    else:
+        return st
+
+
+# print(change_not_poor_into_good('this is not that poor, this is poor'))
+# output:
+# this is good, this is poor
+
+
+'''
+Write a Python function that takes a list of words and returns the length of the longest one
+'''
+
+
+def longest_words(lis):
+    lens_words = [len(word) for word in lis]
+    longest_length = 0
+    for word, length in zip(lis, lens_words):
+        if length > longest_length:
+            longest_length = length
+    return longest_length
+
+
+# print(longest_words(['df', 'dfdg', 'tryhdss', 'gdg', 'tjhtjas']))
+# output:
+# 7
+'''
+ Write a Python program to remove the nth index character from a nonempty string
+'''
+
+
+def remove_nth_char(n, st):
+    return st[:n] + st[n+1:]
+
+
+# print(remove_nth_char(3, 'dongdsgdf'))
+# output:
+# dondsgdf
+
+
+'''
+Write a Python program to change a given string to a new string where the first and last chars have been exchanged
+'''
+
+
+def exchange_firest_last_char(st):
+    return st[-1] + st[1:-1] + st[0]
+
+
+# print(exchange_firest_last_char('dongdgdf'))
+# output:
+# fongdgdd
+
+'''
+Write a Python program to remove the characters which have odd index values of a given string
+'''
+
+
+def remove_odd_index(st):
+    s = ''
+    for index in range(len(st)):
+        if index % 2 == 0:
+            s += st[index]
+    return s
+
+
+# print(remove_odd_index('dongxiang'))
+# output:
+# dnxag
+
+'''
+Write a Python program to count the occurrences of each word in a given sentence
+'''
+
+
+def count_occurrence_word(sentence):
+    l = sentence.split(' ')
+    keys = dict()
+    for word in l:
+        if word not in keys:
+            keys[word] = 1
+        else:
+            keys[word] += 1
+    return keys
+
+
+# print(count_occurrence_word('the quick brown fox jumps over the lazy dog.'))
+# output:
+# {'the': 2, 'quick': 1, 'brown': 1, 'fox': 1, 'jumps': 1, 'over': 1, 'lazy': 1, 'dog.': 1}
+
+
+'''
+Write a Python script that takes input from the user and displays that input back in upper and lower cases
+'''
+
+
+def upper_or_lower_st():
+    st = input()
+    print(st.upper())
+    print(st.lower())
+
+
+# upper_or_lower_st()
+# dongxiang si agG  输入
+# DONGXIANG SI AGG
+# dongxiang si agg
+
+'''
+Write a Python program that accepts a comma separated sequence of words as input and prints the unique words in sorted form (alphanumerically).
+Sample Words : red, white, black, red, green, black
+Expected Result : black, green, red, white,red
+'''
+
+
+def sort_words(words):
+    l = words.split(', ')
+    sorted_words = sorted(l)
+    sorted_words = list(set(sorted_words))
+    return ', '.join(sorted_words)
+
+
+# print(sort_words('red, white, black, red, green, black'))
+# output:
+# white, red, black, green
+
+'''
+Write a Python function to create the HTML string with tags around the word(s)
+Sample function and result :
+add_tags('i', 'Python') -> '<i>Python</i>'
+add_tags('b', 'Python Tutorial') -> '<b>Python Tutorial </b>'
+'''
+
+
+def add_tags(tag, st):
+    return '<{0}>{1}</{2}>'.format(tag, st, tag)
+
+
+print(add_tags('i', 'Python'))
+print(add_tags('b', 'Python Tutorial'))
