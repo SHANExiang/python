@@ -473,5 +473,89 @@ def add_tags(tag, st):
     return '<{0}>{1}</{2}>'.format(tag, st, tag)
 
 
-print(add_tags('i', 'Python'))
-print(add_tags('b', 'Python Tutorial'))
+# print(add_tags('i', 'Python'))
+# print(add_tags('b', 'Python Tutorial'))
+# <i>Python</i>
+# <b>Python Tutorial</b>
+
+
+'''
+Write a Python function to insert a string in the middle of a string. 
+Sample function and result :
+insert_sting_middle('[[]]<<>>', 'Python') -> [[Python]]
+insert_sting_middle('{{}}', 'PHP') -> {{PHP}}
+'''
+
+
+def insert_string_middle(st, word):
+    return st[:2] + word + st[2:]
+
+
+# print(insert_string_middle('[[]]', 'python'))
+# output:
+# [[python]]
+
+'''
+Write a Python function to get a string made of 4 copies of the last two characters of a specified string (length must be at least 2)
+'''
+
+
+def get_copy_last_two_chars(st):
+    if len(st) < 2:
+        print('the string length must be at least 2!')
+        return
+    return 4*st[-2:]
+
+
+# print(get_copy_last_two_chars('python'))
+# print(get_copy_last_two_chars('Exercises'))
+# output:
+# onononon
+# eseseses
+
+'''
+Write a Python function to get a string made of its first three characters of a specified string. 
+If the length of the string is less than 3 then return the original string. 
+Sample function and result :
+first_three('ipy') -> ipy
+first_three('python') -> pyt
+'''
+
+
+def get_first_three_chars(st):
+    if len(st) <= 3:
+        return st
+    return st[:3]
+
+
+# print(get_first_three_chars('python'))
+# print(get_first_three_chars('ipy'))
+# pyt
+# ipy
+
+'''
+Write a Python program to get the last part of a string before a specified character. 
+https://www.w3resource.com/python-exercises
+https://www.w3resource.com/python
+'''
+
+
+def get_last_part_string(st):
+    print(st.split('/'))
+    print(st.rsplit('/'))
+    print(st.split('/', 1))
+    print(st.split('/', 2))
+    print(st.split('/', 3))
+    return st.rsplit('/', 1)[0], st.rsplit('-', 1)[0]
+
+
+# print(get_last_part_string('https://www.w3resource.com/python-exercises/string'))
+# output:
+# ['https:', '', 'www.w3resource.com', 'python-exercises', 'string']
+# ['https:', '', 'www.w3resource.com', 'python-exercises', 'string']
+# ['https:', '/www.w3resource.com/python-exercises/string']
+# ['https:', '', 'www.w3resource.com/python-exercises/string']
+# ['https:', '', 'www.w3resource.com', 'python-exercises/string']
+# ('https://www.w3resource.com/python-exercises', 'https://www.w3resource.com/python')
+
+
