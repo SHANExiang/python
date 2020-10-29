@@ -558,4 +558,92 @@ def get_last_part_string(st):
 # ['https:', '', 'www.w3resource.com', 'python-exercises/string']
 # ('https://www.w3resource.com/python-exercises', 'https://www.w3resource.com/python')
 
+'''
+Write a Python function to reverses a string if it's length is a multiple of 4.
+'''
 
+
+def reverse_str(st):
+    if len(st) % 4 == 0:
+        st = reversed(st)
+        return ''.join(st)
+
+
+# print(reverse_str('srgtfgfd'))
+# output:
+# dfgftgrs
+
+'''
+Write a Python function to convert a given string to all uppercase if it contains at least 2 uppercase characters in the first 4 characters
+'''
+
+
+def convert_uppercase(st):
+    uppercase_count = 0
+    if len(st) >= 4:
+        for s in list(st[:4]):
+             if s.isupper():
+                 uppercase_count += 1
+             else:
+                 continue
+        if uppercase_count >= 2:
+            return st.upper()
+
+
+# print(convert_uppercase('RFshgfg'))
+# output:
+# RFSHGFG
+
+'''
+Write a Python program to sort a string lexicographically.
+'''
+
+
+def sort_str_in_lexicongraphically(st):
+    print(type(sorted(st)))
+    return ''.join(sorted(st))
+
+
+# print(sort_str_in_lexicongraphically('dgfhthsrc'))
+# print(sort_str_in_lexicongraphically(['f', 'g', 'g', 'y', 'a']))
+# output:
+# <class 'list'>
+# cdfghhrst
+# <class 'list'>
+# afggy
+
+'''
+Write a Python program to create a Caesar encryption.
+
+Note: In cryptography, a Caesar cipher, also known as Caesar's cipher, 
+the shift cipher, Caesar's code or Caesar shift, is one of the simplest and most widely known encryption techniques. 
+It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. 
+For example, with a left shift of 3, D would be replaced by A, E would become B, and so on. 
+The method is named after Julius Caesar, who used it in his private correspondence.
+'''
+
+
+def caesar_encryption(plaintext, step):
+    upper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+             'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    lower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    res = []
+    for ch in plaintext:
+        if ch.isupper():
+            index = (upper.index(ch) + step) % 26
+            print(index)
+            res.append(upper[index])
+        if ch.islower():
+            index = (lower.index(ch) + step) % 26
+            print(index)
+            res.append(lower[index])
+    return res
+
+
+print(caesar_encryption(['a', 'R', 'y'], 4))
+# output:
+# 4
+# 21
+# 2
+# ['e', 'V', 'c']
