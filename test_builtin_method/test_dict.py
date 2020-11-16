@@ -1,4 +1,6 @@
+from operator import itemgetter
 import uuid
+
 
 # 合并两个字典
 # 第一种方式
@@ -84,9 +86,13 @@ Write a Python program to extract single key-value pair of a dictionary in varia
 
 def test_items():
     dic11 = {'name': 'dong123'}
-    (x, y), = dic11.items()
+    (x, y) = dic11.items()
     print(x, y)
 
 
 test_items()
 # name dong123
+# ****************************************************************************
+
+
+

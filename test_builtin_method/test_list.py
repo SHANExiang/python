@@ -1,6 +1,7 @@
 from collections import Counter
-from itertools import zip_longest, chain, tee, groupby
+from itertools import zip_longest, chain, tee, groupby, combinations
 from operator import itemgetter
+import random
 
 
 # list类的sort方法进行排序，且还是原列表的顺序
@@ -398,4 +399,78 @@ def whether_all_dict_empty(original_list):
     return flag
 
 
-print(whether_all_dict_empty([{1, 2}, {}, {}]))
+# print(whether_all_dict_empty([{1, 2}, {}, {}]))
+# ****************************************************************************
+'''
+Write a Python program to flatten a given nested list structure. 
+Original list: [0, 10, [20, 30], 40, 50, [60, 70, 80], [90, 100, 110, 120]]
+Flatten list:
+[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+'''
+
+
+def flatten_list(original_list):
+    result_list = list()
+    if not original_list:
+        return result_list
+    stack = [list(original_list)]
+    while stack:
+        c_num = stack.pop()
+        next = c_num.pop()
+        if c_num:
+            stack.append(c_num)
+        if isinstance(next, list):
+            if next:
+                stack.append(list(next))
+        else:
+            result_list.append(next)
+    result_list.reverse()
+    return result_list
+
+
+# print(flatten_list([0, 10, [20, 30], 40, 50, [60, 70, 80], [90, 100, 110, 120]]))
+# [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+# ****************************************************************************
+'''
+Write a Python program to remove consecutive duplicates of a given list. 
+Original list:
+[0, 0, 1, 2, 3, 4, 4, 5, 6, 6, 6, 7, 8, 9, 4, 4]
+After removing consecutive duplicates:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 4]
+'''
+
+
+def remove_consecutive_duplicates(original_list):
+    return [(key, list(group)) for key, group in groupby(original_list)]
+
+
+# print(remove_consecutive_duplicates([0, 0, 1, 2, 3, 4, 4, 5, 6, 6, 6, 7, 8, 9, 4, 4]))
+# [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 4]
+# ****************************************************************************
+'''
+Write a Python program to extract a given number of randomly selected elements from a given list. 
+Original list:
+[1, 1, 2, 3, 4, 4, 5, 1]
+Selected 3 random numbers of the above list:
+[4, 4, 1]
+'''
+
+
+def random_select_nums(original_list, n):
+    return random.sample(original_list, n)
+
+
+# print(random_select_nums([1, 1, 2, 3, 4, 4, 5, 1], 3))
+#  ***************************************************************************
+'''
+Write a Python program to generate the combinations of n distinct objects taken from the elements of a given list.
+Original list: [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+Combinations of 2 distinct objects: [1, 2] [1, 3] [1, 4] [1, 5] .... [7, 8] [7, 9] [8, 9]
+'''
+
+
+def combination_distinct_objects(original_list, n):
+    return list(combinations(original_list, n))
+
+
+# print(combination_distinct_objects([1, 2, 3, 4, 5, 6, 7, 8, 9], 2))
