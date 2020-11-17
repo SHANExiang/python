@@ -1,3 +1,5 @@
+from collections import Counter, defaultdict
+from itertools import product, groupby
 from operator import itemgetter
 import uuid
 
@@ -47,7 +49,7 @@ d = {'354': 34, 'dong': 54, 'fh': 10}
 
 # 将字符串转变成字典
 str1 = "k:1|k1:2|k2:3|k3:4"
-dict1 = dict()
+# dict1 = dict()
 # for x in str1.split("|"):
 #     y = x.split(":")
 #     print(y)
@@ -86,13 +88,110 @@ Write a Python program to extract single key-value pair of a dictionary in varia
 
 def test_items():
     dic11 = {'name': 'dong123'}
-    (x, y) = dic11.items()
+    (x, y), = dic11.items()
     print(x, y)
 
 
-test_items()
+# test_items()
 # name dong123
 # ****************************************************************************
+'''
+Write a Python program to create and display all combinations of letters, 
+selecting each letter from a different key in a dictionary. 
+Sample data : {'1':['a','b'], '2':['c','d']}
+Expected Output:
+ac
+ad
+bc
+bd
+'''
 
 
+def create_combinations_of_letters(original_dict):
+    for x in product(*[original_dict[key] for key in sorted(original_dict.keys())]):
+        print(''.join(x))
+
+
+# create_combinations_of_letters({'1': ['a', 'b'], '2': ['c', 'd']})
+# ac
+# ad
+# bc
+# bd
+# ****************************************************************************
+'''
+Write a Python program to combine values in python list of dictionaries. 
+Sample data: [{'item': 'item1', 'amount': 400}, {'item': 'item2', 'amount': 300}, {'item': 'item1', 'amount': 750}]
+Expected Output: Counter({'item1': 1150, 'item2': 300})
+'''
+
+
+def combine_value_dictionary(original_list):
+    result = Counter()
+    for x in original_list:
+        result[x['item']] += x['amount']
+    return result
+
+
+# print(combine_value_dictionary(
+#     [{'item': 'item1', 'amount': 400},
+#      {'item': 'item2', 'amount': 300},
+#      {'item': 'item1', 'amount': 750}]))
+# ****************************************************************************
+'''
+Write a Python program to create a dictionary from a string.
+Note: Track the count of the letters from the string.
+Sample string : 'w3resource'
+Expected output: {'w': 1, '3': 1, 'r': 2, 'e': 2, 's': 1, 'o': 1, 'u': 1, 'c': 1}
+'''
+
+
+def create_dict_from_str(string):
+    print(dict(Counter(string)))
+
+
+# create_dict_from_str("w3resource")
+# {'w': 1, '3': 1, 'r': 2, 'e': 2, 's': 1, 'o': 1, 'u': 1, 'c': 1}
+# ****************************************************************************
+'''
+Write a Python program to print a dictionary in table format.
+'''
+
+
+def print_in_table_format(original_dict):
+    for row in zip(*([key] + (value)
+                     for key, value in sorted(original_dict.items()))):
+        print(*row)
+
+
+# print_in_table_format({'C1': [1, 2, 3], 'C2': [5, 6, 7], 'C3': [9, 10, 11]})
+# C1 C2 C3
+# 1 5 9
+# 2 6 10
+# 3 7 11
+
+
+dict1 = defaultdict(set)
+dict2 = defaultdict(int)
+dict3 = defaultdict(str)
+dict4 = defaultdict(list)
+
+# print(dict1[1])
+# print(dict2[1])
+# print(dict3[1])
+# print(dict4[1])
+# set()
+# 0
+#
+# []
+
+test_dict1 = {'id': 1, 'subject': 'math', 'V': 70, 'VI': 82}
+# print(test_dict1.pop('id'))  # 1
+# print(test_dict1) # {'subject': 'math', 'V': 70, 'VI': 82}
+
+
+test_dict2 = {'key1': 1, 'key2': 3, 'key3': 2}
+test_dict3 = {'key1': 1, 'key2': 2}
+# print(set(test_dict2.items()))  # {('key1', 1), ('key3', 2), ('key2', 3)}
+# print(set(test_dict3.items()))  # {('key1', 1), ('key2', 2)}
+# print(set(test_dict2.items()) & set(test_dict3.items()))
 

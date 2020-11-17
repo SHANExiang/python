@@ -559,3 +559,4 @@ def get_last_part_string(st):
 # ('https://www.w3resource.com/python-exercises', 'https://www.w3resource.com/python')
 
 
+print('sgr dg  gf b '.translate({32: None}))
