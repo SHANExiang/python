@@ -1,3 +1,5 @@
+from operator import itemgetter
+
 
 '''
 Write a Python program to find unique triplets whose three elements gives the
@@ -34,5 +36,15 @@ lis = [1, -6, 4, 3, -1, 2, 0, -2, -3]
 # [(-6, 2, 4), (-3, -1, 4), (-2, -1, 3), (-1, 0, 1)]
 # ****************************************************************************
 ''''
-
+Write a Python program to sort a tuple by its float element. 
+Sample data: [('item1', '12.20'), ('item2', '15.10'), ('item3', '24.5')]
+Expected Output: [('item3', '24.5'), ('item2', '15.10'), ('item1', '12.20')]
 '''
+
+
+def sorted_tuple(original_list):
+    return sorted(original_list, key=itemgetter(1), reverse=True)
+
+
+# print(sorted_tuple([('item1', '12.20'), ('item2', '15.10'), ('item3', '24.5')]))
+# [('item3', '24.5'), ('item2', '15.10'), ('item1', '12.20')]
