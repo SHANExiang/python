@@ -1,0 +1,628 @@
+1. finally语句块肯定是要执行的，else语句块只会再没有异常时才会执行，
+   如果异常父类放在异常子类的前面，异常子类就不会捕获；
+   
+2. 集合set不支持索引；也不支持元素删除，比如del s[1]；
+
+3. 字符串的strip()方法是用，当strip()有参数时，这个参数可以理解成要删除的字符序列，是否被删除的前提是字符串的开头
+    和结尾是不是包含要删除的字符，如果有就继续处理，没有的话就不会删除中间的字符的；
+	
+4. title()---所有单词的首字母大写，其余小写，非字母后的第一个字母将装换成大写字母；
+
+5. l=[1,2,3,4,5],执行l[1:3]='abc'后，l变成[1,'a','b','c',4,5];
+
+6. python中二进制用0b加相应数字表示，八进制用0o加相应数字表示，十六进制用0x加相应数字表示；bin()方法可以将其他进制
+    的数转换成二进制，oct()将其他进制的数转换成八进制，hex()将其他进制的数转换成十六进制；int()转换成十进制；
+	
+7. type(('a'))--表示的是str类型，不是tuple类型；
+
+8. 文件以什么方式编码的，就应该以什么方式解码；
+
+9. 元组对象进行重新赋值或者更新时会导致运行时异常；
+
+10. for vlan_min. vlan_max in [(200, 300)]:
+        print(vlan_min, vlan_max)   
+	# output:200 300
+	
+11. 两个集合set的并集，set1 |= set2；
+
+12. super()函数的用法
+          super().parent_function()----调用父类方法；
+		  super().__init__()----在__init__()方法中确保父类被正确初始化；
+		  super.__setter__(key, value)----调用原生的方法；
+		  
+13. 子类继承父类，子类的实例可以拥有父类的属性；
+
+14. property用法
+        属性加个@property装饰器，也就是get方法，set方法加@name.setter，delete方法加@name.deleter；
+		如果子类扩展父类的property装饰的属性，
+		get----return super().name
+		set----super(SubClass, SubClass).name.__set__(self, value)
+		delete----super(SubClass, SubClass).name.__delete__(self)
+        如果只扩展一个方法的话，装饰器可以这样写----@ParentClass.name.setter和@ParentClass.name.getter;
+		
+15. 描述器就是一个实现了三个核心属性访问操作(set,get,delete)的类，分别为__get__，__set__和__delete__方法；
+这些方法接受一个实例作为输入，之后相应地操作实例底层的字典；描述其只能在类级别被定义；
+__get__方法就是确保绑定方法对象能被正确的创建；
+
+16. 简化数据结构的初始化。在基类的初始化方法__init__中对传参与每个实例的可允许传参进行校验。
+
+17. 定义接口和抽象基类：
+    继承metaclass=abc.ABCMeta，方法加@abstractmethod
+	抽象类的定义就是让别的类继承它并实现特定的抽象方法，抽象类不能被实例化；
+	
+18. 类装饰器
+
+19. collections定义了很多抽象类，如果想自定义容器类的时候可以继承其中的类；使用collections中的抽象基类，
+可以确保自定义的容器实现了所有必要的方法，并且还能简化类型检查；
+
+20. bisect模块，bisect.insort(lis, item)-----在排序列表中插入元素，保证元素插入后还保持顺序；
+
+21. 代理----一种编程模式，将某个操作转移给另一个对象来实现；
+当需要代理的方法很多时，可以尝试使用__getattr__来实现；__getattr__是在属性不存在的时候才被调用；
+代理模式：代理类中实例化时传被代理类的实例，并在代理类中实现__setattr__/__getattr__/__delattr__方法；
+有个约定是：只代理那些不以下划线开头的属性； 
+
+22. 定义多个构造器，定义__init__(*args)方法，另外的构造器--定义类方法，调用cls(*args);
+
+23. __new__()----创建一个未初始化的实例，类方法中调用时，instance = cls.__new__(cls);
+
+24. 通过字符串调用某个对象对应的方法；
+    1. 直接getattr(obj, 'func')(*args)；
+	2. operator.methodcaller('func', *args)(obj)；
+	
+25. 装饰器----一个装饰器就是一个函数，它接受一个函数作为参数，并返回一个新的函数；
+@timedelta
+def countdown(n):
+    pass
+等价于：
+def countdown(n):
+    pass
+countdown = timedelta(countdown)
+内置的装饰器比如 @staticmethod, @classmethod,@property 原理也是一样的；比如：
+class Main(object):
+    @classmethod
+    def cls_func(cls):
+        pass
+# 等价于
+class Main2(object):
+    def cls_func(self):
+        pass
+    cls_func = classmethod(cls_func)    
+任何时候使用装饰器的时候，都应该使用functools模块中的@wraps装饰器来注解底层包装函数。如果忘记使用@wraps，
+你会发现被装饰函数丢失了所有有用的信息；wraps作用就是将被包装函数的元信息复制到可调用实例中。
+@wraps有一个重要特征是它可以让你通过属性__wrapped__直接访问被包装函数；
+一个装饰器已经包装在了函数上，你想撤销他，直接访问原始的未包装的函数。可以使用:被包装函数名.__wrapped__(*args)访问；
+带参数的装饰器：
+@decorator(x, y, z)
+def func(a, b):
+pass
+装饰器处理过程跟下面的调用是等效的;
+def func(a, b):
+pass
+func = decorator(x, y, z)(func)
+
+
+26. nolocal允许用来修改闭包中的变量；
+
+27. inspect.signature(func)----获得函数的参数信息；
+from inspect import Signature, Parameter
+
+
+params = [Parameter('x', Parameter.POSITIONAL_OR_KEYWORD),
+          Parameter('y', Parameter.POSITIONAL_OR_KEYWORD, default=24),
+          Parameter('z', Parameter.KEYWORD_ONLY, default=None)]
+
+sig = Signature(params)
+print(sig)  # (x, y=24, *, z=None)
+sig就是签名对象，可以使用它的bind()将它绑定到*args, **kwargs中，bound_args = sig.bind(*args, **kwargs),
+参数名称和参数值可以通过bound_args.arguments.items()获得；
+通过将签名和传递的参数绑定起来，可以强制函数调用遵循特定的规则，比如必填、默认、重复等等
+
+28. 在类中定义装饰器，并将其作用在其它函数和方法上；
+from functools import wraps
+
+
+class Decorate(object):
+    def decorate1(self, func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            print('decorate1, instance method')
+            func(*args, **kwargs)
+        return wrapper
+
+    @classmethod
+    def decorate2(cls, func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            print('decorate2, classmethod')
+            func(*args, **kwargs)
+        return wrapper
+
+
+d = Decorate()
+
+
+@d.decorate1
+def add(x, y):
+    return x + y
+
+
+@Decorate.decorate2
+def spam():
+    print('spam')
+
+
+29. 将装饰器定义为类，让装饰器可以同时工作在类定义的内部和外部；
+
+30. 给类或静态方法提供装饰器；但是要确保装饰器在@classmethod和@staticmethod之前；
+class Test(object):
+    @timedelta
+    def instance_method(self, n):
+        print(self, n)
+        while n > 0:
+            n -= 1
+
+    @classmethod
+    @timedelta
+    def class_method(cls, n):
+        print(cls, n)
+        while n> 0:
+            n -= 1
+
+    @staticmethod
+    @timedelta
+    def static_method(n):
+        print(n)
+        while n > 0:
+            n -= 1
+
+31. 通过装饰器给被装饰函数增加参数；
+
+
+32. 使用装饰器扩充类的功能；
+
+33. __call__()----特殊的类实例方法，使得类实例对象可以像调用普通函数那样，以"对象名()"的形式调用；
+Python 中，凡是可以将()直接应用到自身并执行，都称为可调用对象。
+可调用对象包括自定义的函数、Python 内置函数以及本节所讲的类实例对象。
+
+34. 元类控制器实例的创建
+Python是一种动态语言，而动态语言和静态语言最大的不同，就是函数和类不是编译时定义的，而是运行时动态创建的。
+class的定义是运行时动态创建的，而创建class的方法就是使用type()函数
+定义：type(类名, 父类的元组（针对继承的情况，可以为空），包含属性的字典（名称和值）)
+type()函数既可以返回一个对象的类型，又可以创建出新的类型
+metaclass允许你创建类或者修改类。换句话说，你可以把类看成是metaclass创建出来的“实例”。
+一个类定义时metaclass=定义的元类，元类中定义__call__()方法，当这个类实例化时会调用元类的__call__方法，
+再调用自己的__init__方法；
+单例模式：metaclass的实现：
+class Singleton(type):
+    def __init__(self, *args, **kwargs):
+        self._instance = None
+        super().__init__(*args, **kwargs)
+
+    def __call__(self, *args, **kwargs):
+        if not self._instance:
+            self._instance = super().__call__(*args, **kwargs)
+        return self._instance
+
+
+class OnePerson(metaclass=Singleton):
+    def __init__(self):
+        print('create OnePerson instance')
+
+缓存实例：
+class Cached(type):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__cached = weakref.WeakValueDictionary()
+
+    def __call__(self, *args):
+        if args in self.__cached:
+            return self.__cached[args]
+        else:
+            obj = super().__call__(*args)
+            self.__cached[args] = obj
+            return obj
+
+
+class CachedInstance(metaclass=Cached):
+    def __init__(self, name):
+        print('create cached instance({!r})'.format(name))
+        self.name = name
+
+一个基本元类通常是继承type并重定义它的__new__()方法或者是__init__()方法；
+比如定义__new__()方法：
+class MyMeta(type):
+    def __new__(self, clsname, bases, clsdict):
+	# clsname is name of class being defined, bases is tuple of base classes, clsdict is class dictionary
+	return super().__new__(cls, clsname, bases, clsdict)
+另一种定义__init__()方法，
+class MyMeta(type):
+	def __init__(self, clsname, bases, clsdict):
+		super().__init__(clsname, bases, clsdict)
+为了使用这个元类，你通常要将它放到到一个顶级父类定义中，然后其他的类继承
+这个顶级父类。例如：
+class Root(metaclass=MyMeta):
+	pass
+class A(Root):
+	pass
+class B(Root):
+	pass
+
+元类的一个关键特点是它允许你在定义的时候检查类的内容。在重新定义init()方法中，
+你可以很轻松的检查类字典、父类等等。并且，一旦某个元类被指定给了某个类，那么就会被继承到所有子类中去。
+
+使用type.new_class()初始化新的类对象。
+你需要做的只是提供类的名字、父类元组、关键字参数，以及一个用成员变量填充类字典的回调函数。
+一个类的定义如下：
+class Spam(Base, debug=True, typecheck=False):
+	pass
+那么可以将其翻译成如下的 new class() 调用形式：
+Spam = types.new_class('Spam', (Base,),{'debug': True, 'typecheck': False},lambda ns: ns.update(cls_dict))
+new class() 第四个参数最神秘，它是一个用来接受类命名空间的映射对象的函数。
+通常这是一个普通的字典，但是它实际上是 prepare () 方法返回的任意对象。
+
+另一种构造类对象：
+Stock = collections.nametuple('Stock', ['name', 'shares', 'price'])
+
+
+35. 实现上下文管理器
+contextlib模块中@contextmanager装饰器
+@contextmanager
+def timethis(label):
+    start_time = time.time()
+    try:
+        yield
+    finally:
+        end_time = time.time()
+        print("{}: {}".format(label, (end_time - start_time)))
+
+
+with timethis('counting'):
+    n = 100000
+    while n > 0:
+yield之前的代码会在上下文管理器中作为__enter__()方法执行，所有再yield之后的代码会作为__exit__()方法执行，
+如果出现了异常，代码会在yield那里抛出；
+
+36. locals函数
+locals函数可以得到一个局部变量字典，这样就可以从局部变量字典中取得修改过后的变量值；
+每次它被调用的时候，locals()会获取局部变量值中的值并覆盖字典中相应的变量。
+
+37. exec
+exec(object[, globals[, locals]])
+参数
+object：必选参数，表示需要被指定的 Python 代码。它必须是字符串或 code 对象。
+globals：可选参数，表示全局命名空间（存放全局变量），如果被提供，则必须是一个字典对象。
+locals：可选参数，表示当前局部命名空间（存放局部变量），如果被提供，可以是任何映射对象。
+如果该参数被忽略，那么它将会取与 globals 相同的值。
+exec()最佳实践----这样b才是修改后的值
+def test1():
+    a = 10
+    loc = {'a': a}
+    glb = {}
+    exec('b = a + 1', glb, loc)
+    b = loc['b']
+    print(loc)
+
+38. __init__.py用法
+文件init.py的目的是要包含不同运行级别的包的可选的初始化代码。
+举个例子
+如果你执行了语句import graphics，文件graphics/init.py 将被导入, 建立 graphics 命名空间的内容。
+像import graphics.format.jpg这样导入，
+文件graphics/init.py和文件graphics/graphics/formats/init.py将在文件graphics/formats/jpg.py导入之前导入。
+init.py能够用来自动加载子模块:
+# graphics/formats/__init__.py
+from . import jpg
+from . import png
+像这样一个文件, 用户可以仅仅通过import grahpics.formats来代替import graphics.formats.jpg以及import graphics.formats.png。
+
+39.__all__
+模块中定义__all__变量，当这个模块被导入到别处；
+from module import *----这样的导入将会导入所有不以下划线开头的属性和方法；
+from . import A----导入同级目录下的A模块
+from .module import A----打入同级目录下的模块中的类；
+
+40. list用法 
+list.extend(iterable)----表示将一个可迭代对象中的元素追加到列表中；
+itertools.combinations(list, num)----表示获取一个列表的元素个数为num的子list;
+itertools.tee(iterable, num)----表示从一个迭代器中对象返回num个独立的迭代器；
+map(str, list)----将列表中的元素转为str，生成新的list；
+itertools.groupby(list, key=)----groupby()把迭代器中相邻的，指定特征重复的元素挑出来放在一起;
+operator.itemgetter()----使用itemgetter()参数规定分组依据;
+列表中的元素可以根据位置传递给几个变量，这样使用必须变量数和元素数量一致：
+x, y, z = [1, 2, 3]
+print(x, y, z)
+[[5 * x + res for res in range(1, 6)] for x in range(0, 5)]----再一个列表中产生5组5个元素的list；
+list(dict)----使用list()函数，一个字典作为参数，得到的是字典键值的列表；
+ast.literal_eval(str)----将一个str(类似与这样的str--"['Red', 'Green', 'White']")转换成list;
+all('target' == element for element in list)----判断list中是否有元素等于target
+original_list[-1:] = target_list----将最后一个元素替换成一个列表，[1, 3, 5, 7, 9, 10]--->[1, 3, 5, 7, 9, 2, 4, 6, 8];
+list(set().union(*original_list))----[[10, 20], [40], [30, 56, 25], [10, 20], [33], [40]]-->[33, 40, 10, 20, 56, 25, 30]
+list(itertools.chain(*original_list))----将[[2,4,3],[1,5,6], [9], [7,9,0]]-->[2, 4, 3, 1, 5, 6, 9, 7, 9, 0],也可以用如下方法：
+def flatten_list(original_list):
+    result_list = list()
+    if not original_list:
+        return result_list
+    stack = [list(original_list)]
+    while stack:
+        c_num = stack.pop()
+        next = c_num.pop()
+        if c_num:
+            stack.append(c_num)
+        if isinstance(next, list):
+            if next:
+                stack.append(list(next))
+        else:
+            result_list.append(next)
+    result_list.reverse()
+    return result_list
+从一个列表中随机选择n个元素作为新的list----random.sample(original_list, n)
+
+
+41. 重新加载已经加载的模块
+使用imp模块，imp.reload(module)----reload()擦除了模块底层字典的内容，并通过重新执行模块的源代码来刷新它。
+模块对象本身的身份保持不变。因此，该操作在程序中所有已经被导入了的地方更新了模块。
+
+42. sys.path
+你无法导入你的python代码因为它所在的目录不在sys.path里；
+两种常见的方式将新目录添加到sys.path中：
+1. 可以使用PYTHONPATH环境变量来添加；
+env PYTHONPATH=/some/dir:/other/dir python3
+>>> import sys
+>>> sys.path
+['', '/some/dir', '/other/dir', ...]
+这样的环境变量可在程序启动时设置或通过 shell 脚本
+2. 第二种方法是创建一个.pth 文件，将目录列举出来，像这样：
+# myapplication.pth
+/some/dir
+/other/dir
+这个.pth文件需要放在某个Python的site-packages目录，通常位于/usr/local/lib/python3.3/site-packages
+或者 ~/.local/lib/python3.3/sitepackages,
+当解释器启动时，.pth文件里列举出来的存在于文件系统的目录将被添加到sys.path。安装一个.pth
+文件可能需要管理员权限，如果它被添加到系统级的Python解释器。
+3. 手动调节sys.path的值；
+sys.path.insert(0, /some/dir)
+
+43. 对字符串调用导入命令
+import importlib
+mod = importlib.import_module('urllib.request')
+>>> u = mod.urlopen('http://www.python.org')
+import module只是简单地执行和import相同的步骤，但是返回生成的模块对象。
+你只需要将其存储在一个变量，然后像正常的模块一样使用。
+
+
+44. urllib模块
+params = {
+    'name1': 'value1',
+    'name2': 'value2'
+}
+querystring = parse.urlencode(params)
+# querystring变成了这种形式name1=value1&name2=value2
+发送一个简单的HTTP GET请求到远程服务器上----urllib.request.urlopen(url + '?' + querystring)
+将参数编码后作为可选参数提供给urlopen()函数----urllib.request.urlopen(url, querystring.encode('ascii'))
+你需要在发出的请求中提供一些自定义的 HTTP 头，例如修改 user-agent字段, 
+
+46. cidrs地址计算
+当给定一个IP地址，比如18.232.133.86/22，需要求一下这个IP所在网络的网络地址、子网掩码、广播i地址、
+这个网络的第一台主机的IP地址：
+斜线后是22并不是8的整数倍，直接很难看出结果，所以需要通过一系列的计算。
+1.先用8的整数倍对22进行切割：22 =16+6 ，所以这个IP地址的前16位保持不动即18.232.
+2.发现问题出在了第三个8位上，这8位中前面6位被拿来做了网络号，后面2位被拿去做了主机号，
+所以将这8位转化为二进制得到10000101，拿出前6位为<100001>。这是得到了全部的网络号为 18.232.<100001>
+3.将主机号全部置0便是网络地址，18.232.<100001><00>.<00000000>即网络地址为18.232.132.0
+4.同时也得到了这个网络的第一台主机的ip地址，18.232.<100001><00>.<00000001>即18.232.132.1
+5.将主机位全部置1便是广播地址，18.232.<100001><11>.<11111111>即18.232.135.255
+6.子网掩码可以直接使用22计算即可，即前22位都为1，其余为0，即255.255.252.0
+再举一例:
+10.42.115.24/20
+表示前面20位都是网路号，前16位固定，10.42网段的，在这115用二进制表示位01110011，再前4位固定，
+也就是说最小的主机ip地址位10.42.112.0，后面12位全为1时，即最大主机号位10.42.127.255。
+	
+IPv6的128位地址通常写成8组，每组为四个十六进制数的形式。
+
+47. 线程
+判断一个线程是否已经启动
+threadin.Event中set()方法将flag置为True,clear()置为False,wait()阻塞直到flag置为True；
+
+# Lock 对象和 with 语句块一起使用可以保证互斥执行，就是每次只有一个线程可以
+# 执行 with 语句包含的代码块。with 语句会在这个代码块执行前自动获取锁，在执行结
+# 束后自动释放锁。
+from threading import Lock
+
+
+class ShareCounter():
+    def __init__(self, init_num):
+        self._init_num = init_num
+        self._lock = Lock()
+
+    def incr(self, delta=1):
+        with self._lock:
+            self._init_num += delta
+
+    def decr(self, delta):
+        with self._lock:
+            self._init_num -= delta
+
+48. 线程池
+创建一个线程池，用来相应客户端请求或者执行其它的工作；
+concurrent.furtures函数库中有一个ThreadPoolExecutor类可以达到这种效果；
+pool = ThreadPoolExecutor(128)
+pool.submit(func, args)
+
+49. glob
+获得一个目录下的文件；
+files = glob.glob(dir + filenames)
+
+50. 计算密集型函数
+concurrent.futures.ProcessPoolExecutor
+简单用法：
+with ProcessPoolExecutor() as pool:
+    do work in parallel using pool
+其原理是，一个ProcessPoolExecutor创建N个独立的Python解释器，N是系统上面可用CPU的个数。
+你可以通过提供可选参数给 ProcessPoolExecutor(N)来修改处理器数量。
+这个处理池会一直运行到 with 块中最后一个语句执行完成，然后处理池被关闭。
+不过，程序会一直等待直到所有提交的工作被处理完成。
+被提交到池中的工作必须被定义为一个函数。
+有两种方法去提交。如果你想让一个列表推导或一个map()操作并行执行的话，可使用pool.map():
+def work(x):
+	...
+	return result
+# Nonparallel code
+results = map(work, data)
+# Parallel implementation
+with ProcessPoolExecutor() as pool:
+	results = pool.map(work, data)
+另外，你可以使用pool.submit()来手动的提交单个任务：
+# Some function
+def work(x):
+	...
+	return result
+with ProcessPoolExecutor() as pool:
+	...
+	# Example of submitting work to the pool
+	future_result = pool.submit(work, arg)
+	# Obtaining the result (blocks until done)
+	r = future_result.result()
+
+51. 全局锁
+全局解释锁(GIL),python线程被限制到同一时刻只允许一个线程执行这样的一个执行模型；
+实际上，解释器被一个全局解释器锁保护着，它确保任何时候都只有一个Python线程执行。
+GIL最大的问题就是Python的多线程程序并不能利用多核CPU的优势
+（比如一个使用了多个线程的计算密集型程序只会在一个单CPU上面运行）。
+
+52. 消息发布订阅模型
+要实现发布/订阅的消息通信模式，通常要引入一个单独的交换机或网关，对象作为所有消息的中介；
+也就是说，不直接将消息从一个任务发送给另一个任务，而是将其发送给交换机，然后由交换机发送给一个或多个被关联任务；
+一个交换机就是一个普通对象，负责维护一个活跃的订阅者集合，并为绑定/解绑/发送消息提供相应的方法。
+
+53. 生成器替换线程
+yield语句会让它的生成器挂起它的执行，这样可以编写一个调度器，将生成器当作某种任务并使用任务协作切换来替换它们执行；
+
+54. tuple
+color1 = "Red", "Green", "Orange", "White"    ----可以这样定义，color1表示的是一个tuple；
+x = ()----创建一个空元组；
+tuplex = 5----创建一个元素的元组;(5,)
+tuple.count(element)----得到元组中element元素出现的次数；
+
+
+55. set
+set(list1) & set(list2)----表示取两个列表的交集；
+set().union(*L)----L为一个列表，其中包含元组元素，指的是获取一个列表中的独一无二的元素；
+创建非空元素-----set([1, 2, 3, 4, 5])
+集合中添加元素----original_set.add("red"),original_set.update(["blue", "black"])
+集合中删除元素----original_set.pop(),从前往后移除；original_set.remove(num)以及original_set.discard(num)都是移除元素num；
+集合的交集----set1 & set2；
+集合并集----set1 | set2；
+两集合并集-交集-----set1 ^ set2；
+判断set1是否是set2的子集合----set1.issubset(set2);
+同理父集合----set1.issuperset(set2)
+集合的拷贝----set2 = set1.copy();
+集合的清理----set1.clear();
+set1.isdisjoint(set2)----如果set1和set2没有交集，即返回True;
+可以使用函数Frozenset()创建Frozenset。
+此数据类型支持诸如copy()，difference()，intersection()，isdisjoint()，issubset()，issuperset()，
+symmetric_difference()和union()之类的方法。由于不可变，因此没有添加或删除元素的方法。
+set1.difference_update(set2)----从set1中移除两个集合的交集；
+
+
+56. dict
+获得字典的最大深度：
+def get_depth_dictionary(d):
+    if isinstance(d, dict):
+        return 1 + (max(map(get_depth_dictionary, d.values())) if d else 0)
+    return 0
+排序一个字典,根据值排序----sorted(original_dict.items(), key=itemgetter(1))
+几个字典合并到一块----迭代执行dict().update(dict1), 或者此方式：{**dict1, **dict2};
+字典中删除一个key----del dict[key]
+两个字典值相加----collections.Counter(dict1) + collection.Counter(dict2)
+itertools.product('ab', range(3)) --> ('a',0) ('a',1) ('a',2) ('b',0) ('b',1) ('b',2)
+dict(collections.Counter(string))----将一个string中某个字符以及其出现的次数构造成字典:{'w': 1, '3': 1, 'r': 2};
+defaultdict()用法----定义一个普通的dict时，取值时，如果键不在dict中，会直接报keyError，
+但是如果是defaultdict(factory_function)定义的字典，就取工厂函数的默认值，此工厂函数值得是set,int,list,str:
+dict1 = defaultdict(set)
+dict2 = defaultdict(int)
+dict3 = defaultdict(str)
+dict4 = defaultdict(list)
+
+print(dict1[1])
+print(dict2[1])
+print(dict3[1])
+print(dict4[1])
+# set()
+# 0
+# 
+# []
+dict1.pop(key)函数-----意思是将key-value对从dict移除，并且返回值未此key对应的value；
+取两个字典的交集可以按此进行操作-----set(dict1.items()) & set(dict2.items())-得到的是类似于此形式的集合{('key1', 1)}；
+dict(x=list(range(11, 20)), y=list(range(21, 30)), z=list(range(31, 40))----得到{x: [11,...19], y: [21,...29], z: [30,...39]}
+
+
+57. str
+str.translate({32: None})----去掉str中的空格；
+s.translate(table)-----table是字符映射转换表表，是通过maketrans()方法转换而来的。
+intab = "aeiou"
+outtab = "12345"
+trantab1 = str.maketrans(intab,outtab) # 创建字符映射转换表,将intab映射成outtab;
+之后使用s.translate(trantabl1),将s转换；
+
+
+58. collections
+创建双向链表----collections.deque('abcdef');
+双向链表操作：
+deque_obj.pop()--移除最右边的元素，deque_obj.popleft()--移除最做左边的元素；
+deque_obj.reverse()--反转链表；deque_obj.appendleft(element)--左边添加元素；
+deque_obj.append(element)--右边添加元素；
+deque_obj.extend(iterable_obj)；deque_obj.clear()--移除所有的元素；
+deque_obj.count(element)--返回element在deque_obj中出现的次数；
+deque_obj.rotate(2)--双向链表正向转动2次；deque_obj.rotate(-2)--反向转动2次；
+获得一个text出现最多的10个word的列表----collections.Counter(text).most_common(10);
+两个Counter可以取相加，可以取交集，
+
+59. heapq
+heapq.nlargest(num, dict1)----表示获取最大num的dict1的键；
+>>> nlargest(3, {'item1': 45.50, 'item2':35, 'item3': 41.30, 'item4':55, 'item5': 24}.items(), key=lambda x: x[1])
+[('item4', 55), ('item1', 45.5), ('item3', 41.3)]
+heapq.nsmallest(num, list1)----表示湖区最大的num个的list的值，字典同样是键；
+heapq.heappush(iterable_obj, value)----向可迭代对象中push值value;
+heapq.heappop(iterable_obj)----从iterable_obj中pop值，从小到大pop;
+heapq.heapify(original_list)---将一个list转换成heap;
+
+
+60. array
+导入array---from array improt *;
+定义一个Integer类型的array----arr = array('i', original_list)；
+数组最后添加元素----arr.append(10);
+数组反转---arr.reverse();
+数组中一个元素的字节长度----arr.itemsize;
+缓存取的内存地址以及所有元素的长度---arr.buffer_info();
+append() -- append a new item to the end of the array
+buffer_info() -- return information giving the current memory info
+byteswap() -- byteswap all the items of the array
+count() -- return number of occurrences of an object
+extend() -- extend array by appending multiple elements from an iterable
+fromfile() -- read items from a file object
+fromlist() -- append items from the list
+frombytes() -- append items from the string
+index() -- return index of first occurrence of an object
+insert() -- insert a new item into the array at a provided position
+pop() -- remove and return item (default last)
+remove() -- remove first occurrence of an object
+reverse() -- reverse the order of the items in the array
+tofile() -- write all items to a file object
+tolist() -- return the array converted to an ordinary list
+tobytes() -- return the array converted to a string
+
+
+
+
+
+
+
+
+
+		
+
+
+
+
+
+

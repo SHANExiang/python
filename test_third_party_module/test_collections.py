@@ -3,11 +3,11 @@ import pprint
 
 
 # Write a Python program to count the number of each character of a text file.
-file_path = input('file is --')
-with open(file_path, 'r') as info:
-    count = collections.Counter(info.read().upper())
-    print(count.items())
-    pprint.pprint(count)
+# file_path = input('file is --')
+# with open(file_path, 'r') as info:
+#     count = collections.Counter(info.read().upper())
+#     print(count.items())
+#     pprint.pprint(count)
 
 
 # file is --abc.txt
@@ -55,10 +55,55 @@ def test_sum_numbers_counts():
     print(sum(c.values())) # 求数字出现次数的和
 
 
-test_sum_numbers_counts()
+# test_sum_numbers_counts()
 # Counter({4: 4, 3: 3, 2: 1, 0: 1, 10: 1})
 # dict_items([(2, 1), (3, 3), (4, 4), (0, 1), (10, 1)]) <class 'dict_items'>
 # 10
 
 # ****************************************************************************
+'''
+Write a Python program to create a deque and append few elements to the left and right,
+ then remove some elements from the left, right sides and reverse the deque
+'''
+
+
+def reverse_deque():
+    deque_color = collections.deque(["Red","Green","White"])
+    print('original_deque:', deque_color)
+    deque_color.appendleft('black')
+    print('appendleft deque:', deque_color)
+    deque_color.append('blue')
+    print('appendright deque:', deque_color)
+    deque_color.reverse()
+    print('reverse deque:', deque_color)
+    deque_color.pop()
+    print('deque pop right:', deque_color)
+    deque_color.popleft()
+    print('deque popleft:', deque_color)
+
+
+# reverse_deque()
+# original_deque: deque(['Red', 'Green', 'White'])
+# appendleft deque: deque(['black', 'Red', 'Green', 'White'])
+# appendright deque: deque(['black', 'Red', 'Green', 'White', 'blue'])
+# reverse deque: deque(['blue', 'White', 'Green', 'Red', 'black'])
+# deque pop right: deque(['blue', 'White', 'Green', 'Red'])
+# deque popleft: deque(['White', 'Green', 'Red'])
+
+# ****************************************************************************
+'''
+Write a Python program to count the number of times a specific element presents in a deque object
+'''
+
+
+def count_times_deque():
+    deque_obj = collections.deque([1, 2, 3, 4, 3, 2, 3, 2, 3])
+    counter = collections.Counter(deque_obj)
+    print(counter)
+    print(deque_obj.count(2))
+
+
+# count_times_deque()
+# Counter({3: 4, 2: 3, 1: 1, 4: 1})
+# 3
 
