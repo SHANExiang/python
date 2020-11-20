@@ -612,9 +612,31 @@ tolist() -- return the array converted to an ordinary list
 tobytes() -- return the array converted to a string
 
 
+61. functols
+functools.reduce()
+reduce() 函数会对参数序列中元素进行累积。
+函数将一个数据集合（链表，元组等）中的所有数据进行下列操作：
+用传给reduce中的函数function（有两个参数）先对集合中的第1、2个元素进行操作，
+得到的结果再与第三个数据用function函数运算，最后得到一个结果。
+语法
+reduce()函数语法：
+reduce(function, iterable[, initializer])
+参数
+function -- 函数，有两个参数
+iterable -- 可迭代对象
+initializer -- 可选，初始参数
 
-
-
+62. itertools
+islice(iterable, [start, ] stop [, step]):
+创建一个迭代器： iterable[start : stop : step]，跳过前start个项，
+迭代在stop所指定的位置停止，step指定用于跳过项的步幅。迭代默认将从0开始，步幅默认1
+用python快速写斐波那契数列(延迟计算：生成器表达式，仅在需要计算的时候才通过yield产生所需的元素)：
+def get_fibonacci_numbers(a=0, b=1):
+     yield a
+     while True:
+         yield b
+         a, b = b, a + b
+result = list(itertools.islice(get_fibonacci_numbers(), n))
 
 
 
