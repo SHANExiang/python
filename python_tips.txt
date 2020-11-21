@@ -638,10 +638,54 @@ def get_fibonacci_numbers(a=0, b=1):
          a, b = b, a + b
 result = list(itertools.islice(get_fibonacci_numbers(), n))
 
-
-
-
-		
+63. 操作系统服务
+测试文件是否存在：
+try:
+    file = open('a.txt', 'r')
+    text = file.read()
+    file.close()
+except IOError:
+    print('not accessed or problem in reading:', 'a.txt')
+文件是否可读----os.access(file, os.R_OK);
+文件是否可写----os.access(file, os.W_OK);
+文件是否存在----os.access(file, os.F_OK);
+文件是否可执行----os.access(file, os.X_OK);
+在给定路径上执行统计系统调用----stat_info = os.stat('D:\python_projects\python')
+大小---print(stat_info.st_size)
+权限---print(stat_info.st_mode)
+owner---print(stat_info.st_uid)
+device---print(stat_info.st_dev)
+创建时间---print(time.ctime(stat_info.st_ctime))
+最后一次修改时间---print(time.ctime(stat_info.st_mtime))
+最后一次操作时间---print(time.ctime(stat_info.st_atime))
+获得当前执行文件---os.path.basename(__file__)
+获得当前文件的目录名---os.path.dirname(__file__);
+文件的全路径名---__file__;
+创建软链接---os.symlink(src_file, des_file);
+返回软链接的指向---os.readllink(path)；
+解除软链接---os.unlink(path);
+父进程id----os.getppid();
+当前进程的用户id---os.getuid();
+change用户id---os.setuid();
+change路径到上级目录---os.pardir
+change当前路径到指定的路径下：os.chdir(os.pardir)--从当前路径转到上级目录；
+获得所有环境变量----os.environ;
+获得指定环境变量---os.environ[var];
+获得环境变量键的值---os.getenv(key);
+返回主路径，主路径下的子路径名，文件名---os.walk(path);
+判断文件是否存在---os.path.exists(file);
+文件被split成目录和文件---os.path.split(path);
+一个文件被添加到一个目录中---os.path.join(dir, file);
+将字符串写入缓存中---io.StringIO().write(string);
+从缓存中取值---io.StringIO().getvalue();
+使用os模块执行命令---os.system(command);
+获得纪元时间---time.gmtime(0);
+将一个结构时间转换成string---
+t = (2020, 1, 22, 2, 34, 6, 6, 362, 0)
+result = time.asctime(t) #  Sun Jan 22 02:34:06 2020
+将一个string格式的时间转换成结构时间：
+time_string = '04/11/15 11:55:23'
+result = time.strptime(time_string, "%m/%d/%y %H:%M:%S") # time.struct_time(tm_year=2015, tm_mon=4, tm_mday=11, tm_hour=11, tm_min=55, tm_sec=23, tm_wday=5, tm_yday=101, tm_isdst=-1)
 
 
 
