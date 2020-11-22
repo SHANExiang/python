@@ -55,7 +55,10 @@ __get__方法就是确保绑定方法对象能被正确的创建；
 19. collections定义了很多抽象类，如果想自定义容器类的时候可以继承其中的类；使用collections中的抽象基类，
 可以确保自定义的容器实现了所有必要的方法，并且还能简化类型检查；
 
-20. bisect模块，bisect.insort(lis, item)-----在排序列表中插入元素，保证元素插入后还保持顺序；
+20. bisect模块
+bisect.insort(lis, item)-----在排序列表中插入元素，保证元素插入后还保持顺序；
+bisect.bisect_left(list, item)----返回元素item插入list中的索引；
+
 
 21. 代理----一种编程模式，将某个操作转移给另一个对象来实现；
 当需要代理的方法很多时，可以尝试使用__getattr__来实现；__getattr__是在属性不存在的时候才被调用；
@@ -554,6 +557,8 @@ print(dict4[1])
 dict1.pop(key)函数-----意思是将key-value对从dict移除，并且返回值未此key对应的value；
 取两个字典的交集可以按此进行操作-----set(dict1.items()) & set(dict2.items())-得到的是类似于此形式的集合{('key1', 1)}；
 dict(x=list(range(11, 20)), y=list(range(21, 30)), z=list(range(31, 40))----得到{x: [11,...19], y: [21,...29], z: [30,...39]}
+collections.defaultdict(list)----用来将同一键的值放在一个列表中；
+collections.Counter(list1)  == collections.Counter(list2)---用来比较两个list；
 
 
 57. str
@@ -575,7 +580,8 @@ deque_obj.extend(iterable_obj)；deque_obj.clear()--移除所有的元素；
 deque_obj.count(element)--返回element在deque_obj中出现的次数；
 deque_obj.rotate(2)--双向链表正向转动2次；deque_obj.rotate(-2)--反向转动2次；
 获得一个text出现最多的10个word的列表----collections.Counter(text).most_common(10);
-两个Counter可以取相加，可以取交集，
+两个Counter可以取相加，可以取交集;
+collections.OrderDict(original_dict)---记住插入的顺序；
 
 59. heapq
 heapq.nlargest(num, dict1)----表示获取最大num的dict1的键；
@@ -585,6 +591,7 @@ heapq.nsmallest(num, list1)----表示湖区最大的num个的list的值，字典
 heapq.heappush(iterable_obj, value)----向可迭代对象中push值value;
 heapq.heappop(iterable_obj)----从iterable_obj中pop值，从小到大pop;
 heapq.heapify(original_list)---将一个list转换成heap;
+heapq.heappushpop(iterable_obj, item)---pop最小的元素，push一个item;
 
 
 60. array
@@ -688,7 +695,44 @@ time_string = '04/11/15 11:55:23'
 result = time.strptime(time_string, "%m/%d/%y %H:%M:%S") # time.struct_time(tm_year=2015, tm_mon=4, tm_mday=11, tm_hour=11, tm_min=55, tm_sec=23, tm_wday=5, tm_yday=101, tm_isdst=-1)
 
 
+64. enum
+枚举类：
+class Country(enum.Enum):
+    Afghanistan = 93
+    Albania = 355
+    Algeria = 213
+    Andorra = 376
+    Angola = 244
+    Antarctica = 672
+print('Member name:', Country.Albania.name)
+print("Member value:", Country.Albania.value)
+# Member name: Albania
+# Member value: 355
+
+迭代一个枚举类，并独立展示成员以及其值：
+# for data in Country:
+#     print(data.name, data.value)
+
+获取一个枚举类的值列表：
+枚举类继承自enum.IntEnum,返回list(map(int, Country));
 
 
+
+65. queue
+创建队列----queue.Queue(),此对象不可迭代，要迭代使用queue.Queue().queue；
+队列的元素个数----queue.Queue().qsize();
+判断队列是否为空----queue.Queue().empty();
+往queue.Queue()中put元素时是insert队列的后面；
+往queue.LifoQueue()中put元素是insert队列的前面；
+
+
+
+66. 数据结构
+枚举；
+collections;
+数组--array模块；
+堆---heapq模块；
+排序并且插入后还是原来的顺序---bisect.insort(list, item);
+队列---queue模块；
 
 

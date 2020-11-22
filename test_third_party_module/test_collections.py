@@ -107,3 +107,91 @@ def count_times_deque():
 # Counter({3: 4, 2: 3, 1: 1, 4: 1})
 # 3
 
+# ****************************************************************************
+'''
+Write a Python program to count the number of students of individual class.
+'''
+
+
+def test_counter():
+    classes = (
+        ('V', 1),
+        ('VI', 1),
+        ('V', 2),
+        ('VI', 2),
+        ('VI', 3),
+        ('VII', 1),
+    )
+
+    class_names = (class_name for class_name, students in classes)
+    print(collections.Counter(class_names))
+
+
+# test_counter()
+# Counter({'VI': 3, 'V': 2, 'VII': 1})
+
+# ****************************************************************************
+'''
+Write a Python program to create an instance of an OrderedDict using a given dictionary. 
+Sort the dictionary during the creation and print the members of the dictionary in reverse order. Go to the editor
+Expected Output:
+Afghanistan 93
+Albania 355
+Algeria 213
+Andorra 376
+Angola 244
+In reverse order:
+Angola 244
+Andorra 376
+Algeria 213
+Albania 355
+Afghanistan 93
+'''
+given_dictionary = {"Afghanistan": 93, "Albania": 355, "Algeria": 213,
+                    "Andorra": 376, "Angola": 244, "Antarctica": 672}
+
+
+def test_orderdict(original_dict):
+    new_orderdict = collections.OrderedDict(original_dict.items())
+    for key in new_orderdict:
+        print(key, new_orderdict[key])
+    print('Reversed dict:')
+    for key in reversed(new_orderdict):
+        print(key, new_orderdict[key])
+
+
+# test_orderdict(given_dictionary)
+
+'''
+Write a Python program to group a sequence of key-value pairs into a dictionary of lists.
+将同一键的值放在一个列表中，作为此键的值；
+'''
+
+
+def group_into_list():
+    class_roll = [('v', 1), ('vi', 2), ('v', 3), ('vi', 4), ('vii', 1)]
+    d = collections.defaultdict(list)
+    for key, value in class_roll:
+        d[key].append(value)
+    print(sorted(d.items()))
+
+
+# group_into_list()
+# [('v', [1, 3]), ('vi', [2, 4]), ('vii', [1])]
+
+# ****************************************************************************
+'''
+Write a Python program to compare two unordered lists (not sets).
+'''
+
+
+def compare_unordered_list(list1, list2):
+    print(collections.Counter(list1))
+    print(collections.Counter(list2))
+    return collections.Counter(list1) == collections.Counter(list2)
+
+
+n1 = [20, 10, 30, 10, 20, 30]
+n2 = [30, 20, 10, 30, 20, 10]
+print(compare_unordered_list(n1, n2))
+
