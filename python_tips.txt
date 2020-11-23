@@ -734,5 +734,7 @@ collections;
 堆---heapq模块；
 排序并且插入后还是原来的顺序---bisect.insort(list, item);
 队列---queue模块；
+链表---linked list;
+
 
 
