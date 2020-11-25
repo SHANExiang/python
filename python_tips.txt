@@ -737,4 +737,6 @@ collections;
 链表---linked list;
 
 
+67. file操作
+itertools.islice(file, n)----指的是获取文件的前n行，返回可迭代对象；
 
