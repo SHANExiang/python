@@ -745,3 +745,12 @@ seek()方法用于移动文件读取指针到指定位置--fileObject.seek(offse
             0代表从文件开头开始算起，1代表从当前位置开始算起，2代表从文件末尾算起。
     由于程序中使用seek()时，使用了非0的偏移量，因此文件的打开方式中必须包含b，否则就会报io.UnsupportedOperation 错误
 tell()方法返回文件的当前位置，即文件指针当前位置。
+f.readlines()----直接返回一个列表，每行+\n是一个元素；
+f.read()----表示将文件所有内容读取出来，返回一个str;
+f.write(string)----将string写入文件，打开文件写入，如果文件之前有内容，会清除掉，新写入；
+shutil.copyfile(one_file, another_file)----将一个文件的内容拷贝到另一个文件；
+with open(f1) as f, open(f2) as g----可以使用with同时打开两个文件；
+f.read().splitlines()----返回一个列表，分裂每行；
+random.choice(original_list)----从一个列表中随机取出一个元素；
+f.closed()----返回文件是否关闭，True or False;
+string.ascii_uppercase----'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
