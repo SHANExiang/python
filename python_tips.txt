@@ -722,7 +722,7 @@ print("Member value:", Country.Albania.value)
 创建队列----queue.Queue(),此对象不可迭代，要迭代使用queue.Queue().queue；
 队列的元素个数----queue.Queue().qsize();
 判断队列是否为空----queue.Queue().empty();
-往queue.Queue()中put元素时是insert队列的后面；
+往queue.Queue()中put元素时是insert队列的后面;
 往queue.LifoQueue()中put元素是insert队列的前面；
 
 
@@ -804,4 +804,42 @@ $	匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multil
 69. 位运算
 ^   任何数和0做异或运算，结果仍然是原来的数，即 a⊕0=a
     任何数和其自身做异或运算，结果是0，即 a⊕a=0
+
+70. 网络与web编程
+a. 使用socketserver库创建一个TCP服务器
+class EchoHandler(BaseRequestHandler):
+    def handle(self) -> None:
+        print('Got connection from', self.client_address)
+        while True:
+            msg = self.request.recv(8192)
+            if not msg:
+                break
+            self.request.send(msg)
+
+
+if __name__ == "__main__":
+    server = TCPServer(('', 20000), EchoHandler)
+    server.serve_forever()
+定义了一个特殊的处理类，实现了一个handler方法，用来为客户端连接服务。
+request属性是客户端socket,client_address有客户端地址;
+打开另外的python进程可以访问这个服务器;
+s = socket.socket(AF_INET, SOCK_STREAM)
+s.connect(('localhost', 20000))
+s.send(b'hello')---必须是字节类型的;
+s.recv(8192)
+注意：一般情况下这种服务器是单线程的，一次只能为一个客户端提供服务；
+如果想处理多个客户端，可以初始化一个ForkingTCPServer或者ThreadingTCPServer对象；
+
+b.ipaddress使用
+CIDR网络地址转换成所代表的所有IP----net = ipaddress.ip_network("10.42.115.0/24");
+允许像数组一样索引取值----net[0],net.num_address---地址数;
+创建一个ip----address = ipaddress.ip_address('10.42.115.99');
+执行网路成员检查----address in net--True;
+一个ip地址和网络地址能通过一个ip接口来指定:
+inet = ipaddress.ip_interface('10.42.115.23/24');
+inet.network = '10.42.115.23/24';
+inet.ip = '10.42.115.23';
+
+
+
 
