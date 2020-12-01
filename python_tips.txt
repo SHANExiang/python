@@ -841,5 +841,8 @@ inet.network = '10.42.115.23/24';
 inet.ip = '10.42.115.23';
 
 
-
+71. fileinput
+fileinput.input() 创建并返回一个 FileInput 类的实例。
+可以python fileinput.py file_name将文件中的内容打印出来；
+fileinput.input(file_name)----遍历file中的内容；
 
