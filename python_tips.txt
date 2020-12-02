@@ -846,3 +846,10 @@ fileinput.input() 创建并返回一个 FileInput 类的实例。
 可以python fileinput.py file_name将文件中的内容打印出来；
 fileinput.input(file_name)----遍历file中的内容；
 
+72. xml_rpc构造简单远程调用服务
+远程调用理解：在本地调用远程机器上的服务；
+xmlrpc模块的实现---创建一个服务器实例，通过它的方法registry_function()来注册函数，
+                  然后使用方法server_forever()启动它。
+
+73. 向标准错误打印一条消息并返回某个非零状态码来终止程序运行
+raise SystemExit('It failed!')----将消息打印在sys.stderr中,然后程序以状态码1退出；
