@@ -840,6 +840,10 @@ inet = ipaddress.ip_interface('10.42.115.23/24');
 inet.network = '10.42.115.23/24';
 inet.ip = '10.42.115.23';
 
+c. ssl模块为底层socket连接添加SSL的支持
+
+
+
 
 71. fileinput
 fileinput.input() 创建并返回一个 FileInput 类的实例。
