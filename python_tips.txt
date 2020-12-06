@@ -827,8 +827,15 @@ s = socket.socket(AF_INET, SOCK_STREAM)
 s.connect(('localhost', 20000))
 s.send(b'hello')---必须是字节类型的;
 s.recv(8192)
+# s.sendto(b'hello', ('localhost', 20000))
+# s.recvfrom(128)
 注意：一般情况下这种服务器是单线程的，一次只能为一个客户端提供服务；
 如果想处理多个客户端，可以初始化一个ForkingTCPServer或者ThreadingTCPServer对象；
+
+from socket import socket, AF_INET, SOCK_DGRAM
+s = socket(AF_INET, SOCK_DGRAM)
+s.sendto(b'', ('localhost', 20000))
+
 
 b.ipaddress使用
 CIDR网络地址转换成所代表的所有IP----net = ipaddress.ip_network("10.42.115.0/24");
@@ -842,7 +849,13 @@ inet.ip = '10.42.115.23';
 
 c. ssl模块为底层socket连接添加SSL的支持
 
-
+d. 事件驱动 I/O
+事件驱动 I/O 本质上来讲就是将基本 I/O 操作（比如读和写）转化为你程序需要处理的事件。
+例如，当数据在某个 socket 上被接受后，它会转换成一个 receive 事件，
+然后被你定义的回调方法或函数来处理。
+select.select()调用，它会不断轮询文件描述符从而激活它。
+在调用select()之前，时间循环会询问所有的处理器来决定哪一个想接受或发生。
+然后它将结果列表提供给 select()。然后select()返回准备接受或发送的对象组成的列表。
 
 
 71. fileinput
