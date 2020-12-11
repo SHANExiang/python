@@ -75,7 +75,7 @@ def check_access_path(path):
 
 # ***************************************************************************
 
-stat_info = os.stat('D:\python_projects\python')
+# stat_info = os.stat('D:\python_projects\python')
 # print(stat_info.st_size)
 # print(stat_info.st_mode)
 # print(stat_info.st_uid)
