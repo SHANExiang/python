@@ -683,6 +683,8 @@ change当前路径到指定的路径下：os.chdir(os.pardir)--从当前路径�
 判断文件是否存在---os.path.exists(file);
 文件被split成目录和文件---os.path.split(path);
 一个文件被添加到一个目录中---os.path.join(dir, file);
+它接受一个路径，可能是相对路径，最后返回绝对路径---os.path.abspath();
+用来返回正常路径，可以解决双斜杆、对目录的多重引用的问题等---os.path.normpath();
 将字符串写入缓存中---io.StringIO().write(string);
 从缓存中取值---io.StringIO().getvalue();
 使用os模块执行命令---os.system(command);
@@ -754,6 +756,12 @@ f.readlines()----直接返回一个列表，每行+\n是一个元素；
 f.read()----表示将文件所有内容读取出来，返回一个str;
 f.write(string)----将string写入文件，打开文件写入，如果文件之前有内容，会清除掉，新写入；
 shutil.copyfile(one_file, another_file)----将一个文件的内容拷贝到另一个文件；
+shutil.copy(src, dst)----# Copy src to dst. (cp src dst)
+shutil.copy2(src, dst)----# Copy files, but preserve metadata (cp -p src dst)
+shutil.copytree(src, dst)----# Copy directory tree (cp -R src dst)
+shutil.move(src, dst)----# Move src to dst (mv src dst)
+shutil.unpack_archive('Python-3.3.0.tgz')----解压文件；
+shutil.make_archive('py33','zip','Python-3.3.0')----将目录压缩成py33.zip文件；
 with open(f1) as f, open(f2) as g----可以使用with同时打开两个文件；
 f.read().splitlines()----返回一个列表，分裂每行；
 random.choice(original_list)----从一个列表中随机取出一个元素；
@@ -909,7 +917,7 @@ args = parse.parse_args()
 
 76. getpass模块
 弹出密码输入提示，并且不会再任务终端回显密码。
-user = getpass.getuser() # 不会弹出用户名的输入提示。它会根据该用户的 shell 环境或者会依据本地系统的密码库（支持 pwd 模块的平台）来使用当前用户的登录名
+user = getpass.getuser() # 不会弹出用户名的输入提示。它会根据该用户的shell环境或者会依据本地系统的密码库（支持 pwd 模块的平台）来使用当前用户的登录名
 password = getpass.getpass()
 
 77. subprocess模块

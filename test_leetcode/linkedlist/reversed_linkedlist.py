@@ -18,7 +18,7 @@ class Solution(object):
         return prev
 
     def reverse_linkedlist2(self, head):
-        if head == None || head.next == None:
+        if head == None or head.next == None:
             return head
         node = self.reverse_linkedlist2(head.next)
         head.next.next = head
