@@ -1,7 +1,7 @@
 1. finally语句块肯定是要执行的，else语句块只会再没有异常时才会执行，
    如果异常父类放在异常子类的前面，异常子类就不会捕获；
    
-2. 集合set不支持索引；也不支持元素删除，比如del s[1]；
+
 
 3. 字符串的strip()方法是用，当strip()有参数时，这个参数可以理解成要删除的字符序列，是否被删除的前提是字符串的开头
     和结尾是不是包含要删除的字符，如果有就继续处理，没有的话就不会删除中间的字符的；
@@ -23,7 +23,7 @@
         print(vlan_min, vlan_max)   
 	# output:200 300
 	
-11. 两个集合set的并集，set1 |= set2；
+
 
 12. super()函数的用法
           super().parent_function()----调用父类方法；
@@ -324,41 +324,6 @@ from module import *----这样的导入将会导入所有不以下划线开头�
 from . import A----导入同级目录下的A模块
 from .module import A----打入同级目录下的模块中的类；
 
-40. list用法 
-list.extend(iterable)----表示将一个可迭代对象中的元素追加到列表中；
-itertools.combinations(list, num)----表示获取一个列表的元素个数为num的子list;
-itertools.tee(iterable, num)----表示从一个迭代器中对象返回num个独立的迭代器；
-map(str, list)----将列表中的元素转为str，生成新的list；
-itertools.groupby(list, key=)----groupby()把迭代器中相邻的，指定特征重复的元素挑出来放在一起;
-operator.itemgetter()----使用itemgetter()参数规定分组依据;
-列表中的元素可以根据位置传递给几个变量，这样使用必须变量数和元素数量一致：
-x, y, z = [1, 2, 3]
-print(x, y, z)
-[[5 * x + res for res in range(1, 6)] for x in range(0, 5)]----再一个列表中产生5组5个元素的list；
-list(dict)----使用list()函数，一个字典作为参数，得到的是字典键值的列表；
-ast.literal_eval(str)----将一个str(类似与这样的str--"['Red', 'Green', 'White']")转换成list;
-all('target' == element for element in list)----判断list中是否有元素等于target
-original_list[-1:] = target_list----将最后一个元素替换成一个列表，[1, 3, 5, 7, 9, 10]--->[1, 3, 5, 7, 9, 2, 4, 6, 8];
-list(set().union(*original_list))----[[10, 20], [40], [30, 56, 25], [10, 20], [33], [40]]-->[33, 40, 10, 20, 56, 25, 30]
-list(itertools.chain(*original_list))----将[[2,4,3],[1,5,6], [9], [7,9,0]]-->[2, 4, 3, 1, 5, 6, 9, 7, 9, 0],也可以用如下方法：
-def flatten_list(original_list):
-    result_list = list()
-    if not original_list:
-        return result_list
-    stack = [list(original_list)]
-    while stack:
-        c_num = stack.pop()
-        next = c_num.pop()
-        if c_num:
-            stack.append(c_num)
-        if isinstance(next, list):
-            if next:
-                stack.append(list(next))
-        else:
-            result_list.append(next)
-    result_list.reverse()
-    return result_list
-从一个列表中随机选择n个元素作为新的list----random.sample(original_list, n)
 
 
 41. 重新加载已经加载的模块
@@ -422,34 +387,10 @@ querystring = parse.urlencode(params)
 	
 IPv6的128位地址通常写成8组，每组为四个十六进制数的形式。
 
-47. 线程
-判断一个线程是否已经启动
-threadin.Event中set()方法将flag置为True,clear()置为False,wait()阻塞直到flag置为True；
 
-# Lock 对象和 with 语句块一起使用可以保证互斥执行，就是每次只有一个线程可以
-# 执行 with 语句包含的代码块。with 语句会在这个代码块执行前自动获取锁，在执行结
-# 束后自动释放锁。
-from threading import Lock
-
-
-class ShareCounter():
-    def __init__(self, init_num):
-        self._init_num = init_num
-        self._lock = Lock()
-
-    def incr(self, delta=1):
-        with self._lock:
-            self._init_num += delta
-
-    def decr(self, delta):
-        with self._lock:
-            self._init_num -= delta
 
 48. 线程池
-创建一个线程池，用来相应客户端请求或者执行其它的工作；
-concurrent.furtures函数库中有一个ThreadPoolExecutor类可以达到这种效果；
-pool = ThreadPoolExecutor(128)
-pool.submit(func, args)
+
 
 49. glob
 获得一个目录下的文件；
@@ -507,24 +448,7 @@ tuplex = 5----创建一个元素的元组;(5,)
 tuple.count(element)----得到元组中element元素出现的次数；
 
 
-55. set
-set(list1) & set(list2)----表示取两个列表的交集；
-set().union(*L)----L为一个列表，其中包含元组元素，指的是获取一个列表中的独一无二的元素；
-创建非空元素-----set([1, 2, 3, 4, 5])
-集合中添加元素----original_set.add("red"),original_set.update(["blue", "black"])
-集合中删除元素----original_set.pop(),从前往后移除；original_set.remove(num)以及original_set.discard(num)都是移除元素num；
-集合的交集----set1 & set2；
-集合并集----set1 | set2；
-两集合并集-交集-----set1 ^ set2；
-判断set1是否是set2的子集合----set1.issubset(set2);
-同理父集合----set1.issuperset(set2)
-集合的拷贝----set2 = set1.copy();
-集合的清理----set1.clear();
-set1.isdisjoint(set2)----如果set1和set2没有交集，即返回True;
-可以使用函数Frozenset()创建Frozenset。
-此数据类型支持诸如copy()，difference()，intersection()，isdisjoint()，issubset()，issuperset()，
-symmetric_difference()和union()之类的方法。由于不可变，因此没有添加或删除元素的方法。
-set1.difference_update(set2)----从set1中移除两个集合的交集；
+
 
 
 56. dict
