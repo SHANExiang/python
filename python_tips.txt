@@ -1,36 +1,21 @@
 1. finally语句块肯定是要执行的，else语句块只会再没有异常时才会执行，
    如果异常父类放在异常子类的前面，异常子类就不会捕获；
    
-
-
 3. 字符串的strip()方法是用，当strip()有参数时，这个参数可以理解成要删除的字符序列，是否被删除的前提是字符串的开头
     和结尾是不是包含要删除的字符，如果有就继续处理，没有的话就不会删除中间的字符的；
 	
 4. title()---所有单词的首字母大写，其余小写，非字母后的第一个字母将装换成大写字母；
-
-5. l=[1,2,3,4,5],执行l[1:3]='abc'后，l变成[1,'a','b','c',4,5];
 
 6. python中二进制用0b加相应数字表示，八进制用0o加相应数字表示，十六进制用0x加相应数字表示；bin()方法可以将其他进制
     的数转换成二进制，oct()将其他进制的数转换成八进制，hex()将其他进制的数转换成十六进制；int()转换成十进制；
 	
 7. type(('a'))--表示的是str类型，不是tuple类型；
 
-8. 文件以什么方式编码的，就应该以什么方式解码；
-
 9. 元组对象进行重新赋值或者更新时会导致运行时异常；
 
 10. for vlan_min. vlan_max in [(200, 300)]:
         print(vlan_min, vlan_max)   
 	# output:200 300
-	
-
-
-12. super()函数的用法
-          super().parent_function()----调用父类方法；
-		  super().__init__()----在__init__()方法中确保父类被正确初始化；
-		  super.__setter__(key, value)----调用原生的方法；
-		  
-13. 子类继承父类，子类的实例可以拥有父类的属性；
 
 14. property用法
         属性加个@property装饰器，也就是get方法，set方法加@name.setter，delete方法加@name.deleter；
@@ -49,15 +34,6 @@ __get__方法就是确保绑定方法对象能被正确的创建；
 17. 定义接口和抽象基类：
     继承metaclass=abc.ABCMeta，方法加@abstractmethod
 	抽象类的定义就是让别的类继承它并实现特定的抽象方法，抽象类不能被实例化；
-	
-18. 类装饰器
-
-19. collections定义了很多抽象类，如果想自定义容器类的时候可以继承其中的类；使用collections中的抽象基类，
-可以确保自定义的容器实现了所有必要的方法，并且还能简化类型检查；
-
-20. bisect模块
-bisect.insort(lis, item)-----在排序列表中插入元素，保证元素插入后还保持顺序；
-bisect.bisect_left(list, item)----返回元素item插入list中的索引；
 
 
 21. 代理----一种编程模式，将某个操作转移给另一个对象来实现；
@@ -72,121 +48,14 @@ bisect.bisect_left(list, item)----返回元素item插入list中的索引；
 24. 通过字符串调用某个对象对应的方法；
     1. 直接getattr(obj, 'func')(*args)；
 	2. operator.methodcaller('func', *args)(obj)；
-	
-25. 装饰器----一个装饰器就是一个函数，它接受一个函数作为参数，并返回一个新的函数；
-@timedelta
-def countdown(n):
-    pass
-等价于：
-def countdown(n):
-    pass
-countdown = timedelta(countdown)
-内置的装饰器比如 @staticmethod, @classmethod,@property 原理也是一样的；比如：
-class Main(object):
-    @classmethod
-    def cls_func(cls):
-        pass
-# 等价于
-class Main2(object):
-    def cls_func(self):
-        pass
-    cls_func = classmethod(cls_func)    
-任何时候使用装饰器的时候，都应该使用functools模块中的@wraps装饰器来注解底层包装函数。如果忘记使用@wraps，
-你会发现被装饰函数丢失了所有有用的信息；wraps作用就是将被包装函数的元信息复制到可调用实例中。
-@wraps有一个重要特征是它可以让你通过属性__wrapped__直接访问被包装函数；
-一个装饰器已经包装在了函数上，你想撤销他，直接访问原始的未包装的函数。可以使用:被包装函数名.__wrapped__(*args)访问；
-带参数的装饰器：
-@decorator(x, y, z)
-def func(a, b):
-pass
-装饰器处理过程跟下面的调用是等效的;
-def func(a, b):
-pass
-func = decorator(x, y, z)(func)
 
 
 26. nolocal允许用来修改闭包中的变量；
 
-27. inspect.signature(func)----获得函数的参数信息；
-from inspect import Signature, Parameter
 
 
-params = [Parameter('x', Parameter.POSITIONAL_OR_KEYWORD),
-          Parameter('y', Parameter.POSITIONAL_OR_KEYWORD, default=24),
-          Parameter('z', Parameter.KEYWORD_ONLY, default=None)]
-
-sig = Signature(params)
-print(sig)  # (x, y=24, *, z=None)
-sig就是签名对象，可以使用它的bind()将它绑定到*args, **kwargs中，bound_args = sig.bind(*args, **kwargs),
-参数名称和参数值可以通过bound_args.arguments.items()获得；
-通过将签名和传递的参数绑定起来，可以强制函数调用遵循特定的规则，比如必填、默认、重复等等
-
-28. 在类中定义装饰器，并将其作用在其它函数和方法上；
-from functools import wraps
 
 
-class Decorate(object):
-    def decorate1(self, func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            print('decorate1, instance method')
-            func(*args, **kwargs)
-        return wrapper
-
-    @classmethod
-    def decorate2(cls, func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            print('decorate2, classmethod')
-            func(*args, **kwargs)
-        return wrapper
-
-
-d = Decorate()
-
-
-@d.decorate1
-def add(x, y):
-    return x + y
-
-
-@Decorate.decorate2
-def spam():
-    print('spam')
-
-
-29. 将装饰器定义为类，让装饰器可以同时工作在类定义的内部和外部；
-
-30. 给类或静态方法提供装饰器；但是要确保装饰器在@classmethod和@staticmethod之前；
-class Test(object):
-    @timedelta
-    def instance_method(self, n):
-        print(self, n)
-        while n > 0:
-            n -= 1
-
-    @classmethod
-    @timedelta
-    def class_method(cls, n):
-        print(cls, n)
-        while n> 0:
-            n -= 1
-
-    @staticmethod
-    @timedelta
-    def static_method(n):
-        print(n)
-        while n > 0:
-            n -= 1
-
-31. 通过装饰器给被装饰函数增加参数；
-
-
-32. 使用装饰器扩充类的功能；
-
-33. __call__()----特殊的类实例方法，使得类实例对象可以像调用普通函数那样，以"对象名()"的形式调用；
-Python 中，凡是可以将()直接应用到自身并执行，都称为可调用对象。
-可调用对象包括自定义的函数、Python 内置函数以及本节所讲的类实例对象。
 
 34. 元类控制器实例的创建
 Python是一种动态语言，而动态语言和静态语言最大的不同，就是函数和类不是编译时定义的，而是运行时动态创建的。
@@ -306,49 +175,11 @@ def test1():
     b = loc['b']
     print(loc)
 
-38. __init__.py用法
-文件init.py的目的是要包含不同运行级别的包的可选的初始化代码。
-举个例子
-如果你执行了语句import graphics，文件graphics/init.py 将被导入, 建立 graphics 命名空间的内容。
-像import graphics.format.jpg这样导入，
-文件graphics/init.py和文件graphics/graphics/formats/init.py将在文件graphics/formats/jpg.py导入之前导入。
-init.py能够用来自动加载子模块:
-# graphics/formats/__init__.py
-from . import jpg
-from . import png
-像这样一个文件, 用户可以仅仅通过import grahpics.formats来代替import graphics.formats.jpg以及import graphics.formats.png。
-
-39.__all__
-模块中定义__all__变量，当这个模块被导入到别处；
-from module import *----这样的导入将会导入所有不以下划线开头的属性和方法；
-from . import A----导入同级目录下的A模块
-from .module import A----打入同级目录下的模块中的类；
-
-
 
 41. 重新加载已经加载的模块
 使用imp模块，imp.reload(module)----reload()擦除了模块底层字典的内容，并通过重新执行模块的源代码来刷新它。
 模块对象本身的身份保持不变。因此，该操作在程序中所有已经被导入了的地方更新了模块。
 
-42. sys.path
-你无法导入你的python代码因为它所在的目录不在sys.path里；
-两种常见的方式将新目录添加到sys.path中：
-1. 可以使用PYTHONPATH环境变量来添加；
-env PYTHONPATH=/some/dir:/other/dir python3
->>> import sys
->>> sys.path
-['', '/some/dir', '/other/dir', ...]
-这样的环境变量可在程序启动时设置或通过 shell 脚本
-2. 第二种方法是创建一个.pth 文件，将目录列举出来，像这样：
-# myapplication.pth
-/some/dir
-/other/dir
-这个.pth文件需要放在某个Python的site-packages目录，通常位于/usr/local/lib/python3.3/site-packages
-或者 ~/.local/lib/python3.3/sitepackages,
-当解释器启动时，.pth文件里列举出来的存在于文件系统的目录将被添加到sys.path。安装一个.pth
-文件可能需要管理员权限，如果它被添加到系统级的Python解释器。
-3. 手动调节sys.path的值；
-sys.path.insert(0, /some/dir)
 
 43. 对字符串调用导入命令
 import importlib
@@ -389,12 +220,7 @@ IPv6的128位地址通常写成8组，每组为四个十六进制数的形式。
 
 
 
-48. 线程池
 
-
-49. glob
-获得一个目录下的文件；
-files = glob.glob(dir + filenames)
 
 50. 计算密集型函数
 concurrent.futures.ProcessPoolExecutor
@@ -441,306 +267,10 @@ GIL最大的问题就是Python的多线程程序并不能利用多核CPU的优�
 53. 生成器替换线程
 yield语句会让它的生成器挂起它的执行，这样可以编写一个调度器，将生成器当作某种任务并使用任务协作切换来替换它们执行；
 
-54. tuple
-color1 = "Red", "Green", "Orange", "White"    ----可以这样定义，color1表示的是一个tuple；
-x = ()----创建一个空元组；
-tuplex = 5----创建一个元素的元组;(5,)
-tuple.count(element)----得到元组中element元素出现的次数；
 
 
 
 
-
-56. dict
-获得字典的最大深度：
-def get_depth_dictionary(d):
-    if isinstance(d, dict):
-        return 1 + (max(map(get_depth_dictionary, d.values())) if d else 0)
-    return 0
-排序一个字典,根据值排序----sorted(original_dict.items(), key=itemgetter(1))
-几个字典合并到一块----迭代执行dict().update(dict1), 或者此方式：{**dict1, **dict2};
-字典中删除一个key----del dict[key]
-两个字典值相加----collections.Counter(dict1) + collection.Counter(dict2)
-itertools.product('ab', range(3)) --> ('a',0) ('a',1) ('a',2) ('b',0) ('b',1) ('b',2)
-dict(collections.Counter(string))----将一个string中某个字符以及其出现的次数构造成字典:{'w': 1, '3': 1, 'r': 2};
-defaultdict()用法----定义一个普通的dict时，取值时，如果键不在dict中，会直接报keyError，
-但是如果是defaultdict(factory_function)定义的字典，就取工厂函数的默认值，此工厂函数值得是set,int,list,str:
-dict1 = defaultdict(set)
-dict2 = defaultdict(int)
-dict3 = defaultdict(str)
-dict4 = defaultdict(list)
-
-print(dict1[1])
-print(dict2[1])
-print(dict3[1])
-print(dict4[1])
-# set()
-# 0
-# 
-# []
-dict1.pop(key)函数-----意思是将key-value对从dict移除，并且返回值未此key对应的value；
-取两个字典的交集可以按此进行操作-----set(dict1.items()) & set(dict2.items())-得到的是类似于此形式的集合{('key1', 1)}；
-dict(x=list(range(11, 20)), y=list(range(21, 30)), z=list(range(31, 40))----得到{x: [11,...19], y: [21,...29], z: [30,...39]}
-collections.defaultdict(list)----用来将同一键的值放在一个列表中；
-collections.Counter(list1)  == collections.Counter(list2)---用来比较两个list；
-
-
-57. str
-str.translate({32: None})----去掉str中的空格；
-s.translate(table)-----table是字符映射转换表表，是通过maketrans()方法转换而来的。
-intab = "aeiou"
-outtab = "12345"
-trantab1 = str.maketrans(intab,outtab) # 创建字符映射转换表,将intab映射成outtab;
-之后使用s.translate(trantabl1),将s转换；
-
-
-58. collections
-创建双向链表----collections.deque('abcdef');
-双向链表操作：
-deque_obj.pop()--移除最右边的元素，deque_obj.popleft()--移除最做左边的元素；
-deque_obj.reverse()--反转链表；deque_obj.appendleft(element)--左边添加元素；
-deque_obj.append(element)--右边添加元素；
-deque_obj.extend(iterable_obj)；deque_obj.clear()--移除所有的元素；
-deque_obj.count(element)--返回element在deque_obj中出现的次数；
-deque_obj.rotate(2)--双向链表正向转动2次；deque_obj.rotate(-2)--反向转动2次；
-获得一个text出现最多的10个word的列表----collections.Counter(text).most_common(10);
-两个Counter可以取相加，可以取交集;
-collections.OrderDict(original_dict)---记住插入的顺序；
-
-59. heapq
-heapq.nlargest(num, dict1)----表示获取最大num的dict1的键；
->>> nlargest(3, {'item1': 45.50, 'item2':35, 'item3': 41.30, 'item4':55, 'item5': 24}.items(), key=lambda x: x[1])
-[('item4', 55), ('item1', 45.5), ('item3', 41.3)]
-heapq.nsmallest(num, list1)----表示湖区最大的num个的list的值，字典同样是键；
-heapq.heappush(iterable_obj, value)----向可迭代对象中push值value;
-heapq.heappop(iterable_obj)----从iterable_obj中pop值，从小到大pop;
-heapq.heapify(original_list)---将一个list转换成heap;
-heapq.heappushpop(iterable_obj, item)---pop最小的元素，push一个item;
-
-
-60. array
-导入array---from array improt *;
-定义一个Integer类型的array----arr = array('i', original_list)；
-数组最后添加元素----arr.append(10);
-数组反转---arr.reverse();
-数组中一个元素的字节长度----arr.itemsize;
-缓存取的内存地址以及所有元素的长度---arr.buffer_info();
-append() -- append a new item to the end of the array
-buffer_info() -- return information giving the current memory info
-byteswap() -- byteswap all the items of the array
-count() -- return number of occurrences of an object
-extend() -- extend array by appending multiple elements from an iterable
-fromfile() -- read items from a file object
-fromlist() -- append items from the list
-frombytes() -- append items from the string
-index() -- return index of first occurrence of an object
-insert() -- insert a new item into the array at a provided position
-pop() -- remove and return item (default last)
-remove() -- remove first occurrence of an object
-reverse() -- reverse the order of the items in the array
-tofile() -- write all items to a file object
-tolist() -- return the array converted to an ordinary list
-tobytes() -- return the array converted to a string
-
-
-61. functols
-functools.reduce()
-reduce() 函数会对参数序列中元素进行累积。
-函数将一个数据集合（链表，元组等）中的所有数据进行下列操作：
-用传给reduce中的函数function（有两个参数）先对集合中的第1、2个元素进行操作，
-得到的结果再与第三个数据用function函数运算，最后得到一个结果。
-语法
-reduce()函数语法：
-reduce(function, iterable[, initializer])
-参数
-function -- 函数，有两个参数
-iterable -- 可迭代对象
-initializer -- 可选，初始参数
-
-62. itertools
-islice(iterable, [start, ] stop [, step]):
-创建一个迭代器： iterable[start : stop : step]，跳过前start个项，
-迭代在stop所指定的位置停止，step指定用于跳过项的步幅。迭代默认将从0开始，步幅默认1
-用python快速写斐波那契数列(延迟计算：生成器表达式，仅在需要计算的时候才通过yield产生所需的元素)：
-def get_fibonacci_numbers(a=0, b=1):
-     yield a
-     while True:
-         yield b
-         a, b = b, a + b
-result = list(itertools.islice(get_fibonacci_numbers(), n))
-
-63. 操作系统服务
-测试文件是否存在：
-try:
-    file = open('a.txt', 'r')
-    text = file.read()
-    file.close()
-except IOError:
-    print('not accessed or problem in reading:', 'a.txt')
-文件是否可读----os.access(file, os.R_OK);
-文件是否可写----os.access(file, os.W_OK);
-文件是否存在----os.access(file, os.F_OK);
-文件是否可执行----os.access(file, os.X_OK);
-在给定路径上执行统计系统调用----stat_info = os.stat('D:\python_projects\python')
-大小---print(stat_info.st_size)
-权限---print(stat_info.st_mode)
-owner---print(stat_info.st_uid)
-device---print(stat_info.st_dev)
-创建时间---print(time.ctime(stat_info.st_ctime))
-最后一次修改时间---print(time.ctime(stat_info.st_mtime))
-最后一次操作时间---print(time.ctime(stat_info.st_atime))
-获得当前执行文件---os.path.basename(__file__)
-获得当前文件的目录名---os.path.dirname(__file__);
-文件的全路径名---__file__;
-创建软链接---os.symlink(src_file, des_file);
-返回软链接的指向---os.readllink(path)；
-解除软链接---os.unlink(path);
-父进程id----os.getppid();
-当前进程的用户id---os.getuid();
-change用户id---os.setuid();
-change路径到上级目录---os.pardir
-change当前路径到指定的路径下：os.chdir(os.pardir)--从当前路径转到上级目录；
-获得所有环境变量----os.environ;
-获得指定环境变量---os.environ[var];
-获得环境变量键的值---os.getenv(key);
-返回主路径，主路径下的子路径名，文件名---os.walk(path);
-判断文件是否存在---os.path.exists(file);
-文件被split成目录和文件---os.path.split(path);
-一个文件被添加到一个目录中---os.path.join(dir, file);
-它接受一个路径，可能是相对路径，最后返回绝对路径---os.path.abspath();
-用来返回正常路径，可以解决双斜杆、对目录的多重引用的问题等---os.path.normpath();
-将字符串写入缓存中---io.StringIO().write(string);
-从缓存中取值---io.StringIO().getvalue();
-使用os模块执行命令---os.system(command);
-获得纪元时间---time.gmtime(0);
-将一个结构时间转换成string---
-t = (2020, 1, 22, 2, 34, 6, 6, 362, 0)
-result = time.asctime(t) #  Sun Jan 22 02:34:06 2020
-将一个string格式的时间转换成结构时间：
-time_string = '04/11/15 11:55:23'
-result = time.strptime(time_string, "%m/%d/%y %H:%M:%S") # time.struct_time(tm_year=2015, tm_mon=4, tm_mday=11, tm_hour=11, tm_min=55, tm_sec=23, tm_wday=5, tm_yday=101, tm_isdst=-1)
-当前终端的大小以便正确的格式化输出----size=os.get_terminal_size()
->>> size.columns
-184
->>> size.lines
-16
-
-
-64. enum
-枚举类：
-class Country(enum.Enum):
-    Afghanistan = 93
-    Albania = 355
-    Algeria = 213
-    Andorra = 376
-    Angola = 244
-    Antarctica = 672
-print('Member name:', Country.Albania.name)
-print("Member value:", Country.Albania.value)
-# Member name: Albania
-# Member value: 355
-
-迭代一个枚举类，并独立展示成员以及其值：
-# for data in Country:
-#     print(data.name, data.value)
-
-获取一个枚举类的值列表：
-枚举类继承自enum.IntEnum,返回list(map(int, Country));
-
-
-
-65. queue
-创建队列----queue.Queue(),此对象不可迭代，要迭代使用queue.Queue().queue；
-队列的元素个数----queue.Queue().qsize();
-判断队列是否为空----queue.Queue().empty();
-往queue.Queue()中put元素时是insert队列的后面;
-往queue.LifoQueue()中put元素是insert队列的前面；
-
-
-
-66. 数据结构
-枚举；
-collections;
-数组--array模块；
-堆---heapq模块；
-排序并且插入后还是原来的顺序---bisect.insort(list, item);
-队列---queue模块；
-链表---linked list;
-
-
-67. file操作
-itertools.islice(file, n)----指的是获取文件的前n行，返回可迭代对象；
-seek()方法用于移动文件读取指针到指定位置--fileObject.seek(offset[, whence])
-    offset--开始的偏移量，也就是代表需要移动偏移的字节数
-    whence：可选，默认值为 0。给offset参数一个定义，表示要从哪个位置开始偏移；
-            0代表从文件开头开始算起，1代表从当前位置开始算起，2代表从文件末尾算起。
-    由于程序中使用seek()时，使用了非0的偏移量，因此文件的打开方式中必须包含b，否则就会报io.UnsupportedOperation 错误
-tell()方法返回文件的当前位置，即文件指针当前位置。
-f.readlines()----直接返回一个列表，每行+\n是一个元素；
-f.read()----表示将文件所有内容读取出来，返回一个str;
-f.write(string)----将string写入文件，打开文件写入，如果文件之前有内容，会清除掉，新写入；
-shutil.copyfile(one_file, another_file)----将一个文件的内容拷贝到另一个文件；
-shutil.copy(src, dst)----# Copy src to dst. (cp src dst)
-shutil.copy2(src, dst)----# Copy files, but preserve metadata (cp -p src dst)
-shutil.copytree(src, dst)----# Copy directory tree (cp -R src dst)
-shutil.move(src, dst)----# Move src to dst (mv src dst)
-shutil.unpack_archive('Python-3.3.0.tgz')----解压文件；
-shutil.make_archive('py33','zip','Python-3.3.0')----将目录压缩成py33.zip文件；
-with open(f1) as f, open(f2) as g----可以使用with同时打开两个文件；
-f.read().splitlines()----返回一个列表，分裂每行；
-random.choice(original_list)----从一个列表中随机取出一个元素；
-f.closed()----返回文件是否关闭，True or False;
-string.ascii_uppercase----'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-
-68. re
-pattern = re.compile(r'')----预编译,接下来重复使用时不需再编译,返回Pattern对象；
-pattern.search(string)----获得根据pattern搜索的字符串；
-re.search(pattern, string)----对整个字符串进行匹配，并不是要求必须从开头匹配，返回第一个成功匹配的字符串就返回；
-正则表达式中的特殊字符：
-$	匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline 属性，则 $ 也匹配 '\n' 或 '\r'。要匹配 $ 字符本身，请使用 \$。
-( )	标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 \( 和 \)。
-*	匹配前面的子表达式零次或多次。要匹配 * 字符，请使用 \*。
-+	匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 \+。
-.	匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 \. 。
-[	标记一个中括号表达式的开始。要匹配 [，请使用 \[。
-?	匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 \?。
-\	将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， 'n' 匹配字符 'n'。'\n' 匹配换行符。序列 '\\' 匹配 "\"，而 '\(' 则匹配 "("。
-^	匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，请使用 \^。
-{	标记限定符表达式的开始。要匹配 {，请使用 \{。
-|	指明两项之间的一个选择。要匹配 |，请使用 \|。
-
-正则表达式的限定符有：
-字符	描述
-*	匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。* 等价于{0,}。
-+	匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。
-?	匹配前面的子表达式零次或一次。例如，"do(es)?" 可以匹配 "do" 、 "does" 中的 "does" 、 "doxy" 中的 "do" 。? 等价于 {0,1}。
-{n}	n 是一个非负整数。匹配确定的 n 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。
-{n,}	n 是一个非负整数。至少匹配n 次。例如，'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。
-{n,m}	m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。例如，"o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
-
-字符	描述
-[ABC]	匹配 [...] 中的所有字符，例如 [aeiou] 匹配字符串 "google runoob taobao" 中所有的 e o u a 字母。
-[^ABC]	匹配除了 [...] 中字符的所有字符，例如 [^aeiou] 匹配字符串 "google runoob taobao" 中除了 e o u a 字母的所有字母。
-[A-Z]	[A-Z] 表示一个区间，匹配所有大写字母，[a-z] 表示所有小写字母。
-.	匹配除换行符（\n、\r）之外的任何单个字符，相等于 [^\n\r]。
-[\s\S]	匹配所有。\s 是匹配所有空白符，包括换行，\S 非空白符，包括换行。
-\w	匹配字母、数字、下划线。等价于 [A-Za-z0-9_]
-
-非打印字符也可以是正则表达式的组成部分。下表列出了表示非打印字符的转义序列：
-\cx	匹配由x指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 'c' 字符。
-\f	匹配一个换页符。等价于 \x0c 和 \cL。
-\n	匹配一个换行符。等价于 \x0a 和 \cJ。
-\r	匹配一个回车符。等价于 \x0d 和 \cM。
-\s	匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。注意 Unicode 正则表达式会匹配全角空格符。
-\S	匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。
-\t	匹配一个制表符。等价于 \x09 和 \cI。
-\v	匹配一个垂直制表符。等价于 \x0b 和 \cK。
-
-
-69. 位运算
-^   任何数和0做异或运算，结果仍然是原来的数，即 a⊕0=a
-    任何数和其自身做异或运算，结果是0，即 a⊕a=0
 
 70. 网络与web编程
 a. 使用socketserver库创建一个TCP服务器
@@ -814,45 +344,6 @@ a. 构造dummy = LinkedList(0, head)   先获得链表的长度，之后遍历�
 b. 构造dummy = LinkedList(0, head)  将各个node放入栈中，遍历n次进行pop()，之后赋值；
 c. 构造dummy = LinkedList(0, head)  双指针，一个链表先向前n步，这样两个链表相差n,当第一个链表走到最后的时候，第二个链表就是倒数第n个元素；
 
-75. argparse模块
-为了解析命令行参数，首先要创建一个ArgumentParser实例，并使用add_argument()方法声明想要支持的选项；
-在每个add_argument()调用中，dest参数指定解析结果被指派给属性的名字。metavar参数被用来生成帮助信息；
-action参数指定跟属性对应的处理逻辑，通常的值为store，被用来存储某个值或将多个参数值收集到一个列表中。
-parse = argparse.ArgumentParser(description='Search some file')
-# 用来构造一个文件名列表
-parse.add_argument(dest='filenames', metavar='filename', nargs='*')
-# 参数说明允许某个参数重复出现多次，并将它们追加到一个列表中去。required 标志表示该参数至少要有一个。
--p 和 --pat 表示两个参数名形式都可使用。
-parse.add_argument('-p', '--pat', metavar='pattern', required=True,
-                   dest='patterns', action='append',
-                   help='text pattern to search for')
-# 下面的参数根据参数是否存在来设置一个 Boolean 标志
-parse.add_argument('-v', dest='verbose', action='store_true',
-                   help='verbose mode')
-# 下面的参数接受一个单独值并将其存储为一个字符串
-parse.add_argument('-o', dest='outfile', action='store', help='output file')
-# 下面的参数说明接受一个值，但是会将其和可能的选择值做比较，以检测其合法性
-parse.add_argument('--speed', dest='speed', action='store',
-                   choices={'slow', 'fast'}, default='slow',
-                   help='search speed')
-# 一旦参数选项被指定，你就可以执行 parser.parse() 方法了。它会处理sys.argv的值并返回一个结果实例。
-每个参数值会被设置成该实例中add_argument()方法的dest参数指定的属性值
-args = parse.parse_args()
 
-76. getpass模块
-弹出密码输入提示，并且不会再任务终端回显密码。
-user = getpass.getuser() # 不会弹出用户名的输入提示。它会根据该用户的shell环境或者会依据本地系统的密码库（支持 pwd 模块的平台）来使用当前用户的登录名
-password = getpass.getpass()
 
-77. subprocess模块
-执行外部命令并获取它的输出
-默认情况下，check_output()仅仅返回输入到标准输出的值。如果你需要同时收集标准输出和错误输出，使用 stderr 参数
-output_bytes = subprocess.check_output(['cmd', 'arg1', 'arg2'],
-                                       stderr=subprocess.STDOUT)
-# 如果你需要用一个超时机制来执行命令，使用 timeout 参数：
-try:
-    output_bytes = subprocess.check_output(['cmd', 'arg1', 'arg2'], timeout=5)
-except subprocess.TimeoutExpired as e:
-    pass
-# 如果你想让命令被一个 shell执行，传递一个字符串参数，并设置参数 shell=True
-output_bytes = subprocess.check_output('grep python |wc > out', shell=True)
+
