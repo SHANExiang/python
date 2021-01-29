@@ -11,12 +11,12 @@ headers = {'User-Agent': user_agent}
 
 # one_url = 'https://www.sm265.net/bd/69/39022.html'
 
-# label_url = 'https://www.sm265.net/bd/6/'
+label_url = 'https://www.sm265.net/bd/6/'
 
 
 # 处理分页子页面
 def get_pagination_url(one_url):
-    html = requests.get(one_url, headers).content
+    html = requests.get(one_url).content
     soup = BeautifulSoup(html, features='html.parser')
     hrefs = soup.find_all(class_="page-show")[0].find_all('a')
     url_list = set()
@@ -33,7 +33,7 @@ def get_pagination_url(one_url):
 
 
 def scrapy_photoes_one_url(url):
-    html = requests.get(url, headers).content
+    html = requests.get(url).content
     soup = BeautifulSoup(html, features='html.parser')
     text = soup.find_all('img')
     for x in text:
@@ -42,7 +42,7 @@ def scrapy_photoes_one_url(url):
         if not os.path.exists(dir):
             os.mkdir(dir)
         image_name = src.split('/')[-1]
-        res = requests.get(src, headers)
+        res = requests.get(src)
         with open(dir + '/' + image_name, 'wb') as f:
             f.write(res.content)
             print('get images %s successful' % (dir + '/' + image_name) )
@@ -50,7 +50,7 @@ def scrapy_photoes_one_url(url):
 
 # 一个页面有多个子页面
 def scrapy_label_photoes(label_url):
-    html = requests.get(label_url, headers).content
+    html = requests.get(label_url).content
     soup = BeautifulSoup(html, features='html.parser')
     text = soup.find_all('li')
     label_url_list = list()
