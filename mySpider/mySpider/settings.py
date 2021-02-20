@@ -86,3 +86,10 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+
+ITEM_PIPELINES = {
+   'mySpider.pipelines.MyspiderPipeline': 1,
+}
+IMAGES_STORE='F:'
+DOWNLOAD_DELAY = 0.1
