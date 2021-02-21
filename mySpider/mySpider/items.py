@@ -13,3 +13,8 @@ class MyspiderItem(scrapy.Item):
     # info = scrapy.Field()
 
     image_urls = scrapy.Field()
+
+
+class MaskedQueenItem(scrapy.Item):
+    image_urls = scrapy.Field()
+    alt = scrapy.Field()
