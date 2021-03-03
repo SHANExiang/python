@@ -34,6 +34,7 @@ class Solution:
         prev.next = l1 if l1 is not None else l2
         return head.next
 
+
 if __name__ == "__main__":
     solution = Solution()
     l1 = ListNode(1)
