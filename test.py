@@ -1,3 +1,15 @@
 
 
-print([i for i in range(1, 100) if i % 2 == 0])
+class A(object):
+    def show(self):
+        print('A detail')
+
+
+class B(A):
+    def show(self):
+        print('B detail')
+
+
+obj = B()
+obj.__class__ = A
+obj.show()
