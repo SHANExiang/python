@@ -35,4 +35,7 @@ if __name__ == "__main__":
     solution = Solution()
     # print(solution.addBinary('11', '1'))
     # print(solution.addBinary('1010', '1011'))
-    print(solution.addBinary('0', '0'))
+    # print(solution.addBinary('0', '0'))
+    print(int("11", 2))
+    print("{0:b}".format(11))
+    print("a ".strip().split(" "))
