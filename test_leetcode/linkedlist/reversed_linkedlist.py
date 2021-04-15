@@ -10,7 +10,7 @@ class Solution(object):
     def reverse_linkedlist1(self, head):
         prev = None
         cur = head
-        while not cur:
+        while cur:
             node = cur.next
             cur.next = prev
             prev = cur
