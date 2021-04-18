@@ -24,3 +24,12 @@ class Solution(object):
         head.next.next = head
         head.next = None
         return node
+
+    def reverse_linkedlist3(self, head):
+        def recur(cur, pre):
+            if not cur:
+                return pre
+            res = recur(cur.next, cur)
+            cur.next = pre
+            return res
+        return recur(head, None)
