@@ -10,6 +10,8 @@ class TreeNode:
 
 class Solution:
     def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
         queue = [root]
         while queue:
             tmp = []
@@ -39,8 +41,8 @@ class Solution:
                 return False
             if left.val != right.val:
                 return False
-            return is_sysmmetric_tree(left.left, left.right) & \
-                   is_sysmmetric_tree(right.left, right.right)
+            return is_sysmmetric_tree(left.left, right.right) & \
+                   is_sysmmetric_tree(right.left, left.right)
         if not root:
             return True
         return is_sysmmetric_tree(root.left, root.right)
