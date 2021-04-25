@@ -28,8 +28,6 @@ class Solution:
         return level
 
 
-
-
 if __name__ == "__main__":
     solution = Solution()
     print(solution.sumNums(3))
