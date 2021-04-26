@@ -30,10 +30,25 @@ class TreeNode:
 
 class Solution:
     def isSubStructure(self, A: TreeNode, B: TreeNode) -> bool:
-        if not B:
+        if not B or not A:
             return False
-        if A.val == B.val:
-            return self.isSubStructure(A.left, B.left) and \
-                   self.isSubStructure(A.right, B.right)
-        else:
-            return self.isSubStructure(A.left, B) or self.isSubStructure(A.right, B)
+
+        def recur(A, B):
+            if not B:
+                return True
+            if not A:
+                return False
+            if A.val != B.val:
+                return False
+            return recur(A.left, B.left) and recur(A.right, B.right)
+        B_val = B.val
+        queue = [A]
+        while queue:
+            node = queue.pop()
+            if node.val == B_val and recur(node, B):
+                return True
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        return False
