@@ -6,33 +6,20 @@ class ListNode:
 
 # 输入：1->2->4, 1->3->4
 # 输出：1->1->2->3->4->4
+
+
 class Solution:
-    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        pre_tmp = ListNode(-1)
-        pre = pre_tmp
-        cur1, cur2 = l1, l2
-        while cur1 and cur2:
-            if cur1.val <= cur2.val:
-                pre_tmp.next = ListNode(cur1.val)
-                cur1 = cur1.next
+    def majorityElement(self, nums) -> int:
+        tmp_dict = dict()
+        for num in nums:
+            if num not in tmp_dict:
+                tmp_dict[num] = 1
             else:
-                pre_tmp.next = ListNode(cur2.val)
-                cur2 = cur2.next
-            pre_tmp = pre_tmp.next
-        if cur1:
-            pre_tmp.next = cur1
-        if cur2:
-            pre_tmp.next = cur2
-        return pre.next
+                tmp_dict[num] += 1
+        tmp_dict = sorted(tmp_dict.items(), key=lambda x: x[1])
+        return tmp_dict[-1][1]
 
 
 if __name__ == "__main__":
-    l1 = ListNode(1)
-    l1.next = ListNode(2)
-    l1.next.next = ListNode(4)
-
-    l2 = ListNode(1)
-    l2.next = ListNode(3)
-    l2.next.next = ListNode(4)
     solution = Solution()
-    solution.mergeTwoLists(l1, l2)
+    print(solution.majorityElement([1, 2, 3, 2, 2, 2, 5, 4, 2]))
