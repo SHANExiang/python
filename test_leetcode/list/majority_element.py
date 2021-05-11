@@ -15,7 +15,14 @@ class Solution:
                 counter_dict[num] += 1
         return list(filter(lambda x: x[1] > beyond_counter, counter_dict.items()))[0][0]
 
+    def majorityElement2(self, nums) -> int:
+        votes = 0
+        for num in nums:
+            if votes == 0: x = num
+            votes += 1 if num == x else -1
+        return x
+
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.majorityElement([2,2,1,1,1,2,2]))
+    print(solution.majorityElement2([2,2,1,1,1,2,2]))
