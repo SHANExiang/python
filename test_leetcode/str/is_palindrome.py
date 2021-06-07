@@ -31,6 +31,13 @@ class Solution(object):
                 return False
         return True
 
+    def is_palindrome2(self):
+        import re
+        result_list = re.findall("[A-Za-z0-9]", s, re.IGNORECASE)
+        print(result_list)
+        result_list = [str(ele).lower() for ele in result_list]
+        return result_list == result_list[::-1]
+
 
 if __name__ == "__main__":
     solution = Solution()
