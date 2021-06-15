@@ -62,6 +62,18 @@ class Solution:
         dfs(root)
         return self.res
 
+    def kth_larget2(self, root, k):
+        stack = []
+        while True:
+            while root:
+                stack.append(root)
+                root = root.right
+            root = stack.pop()
+            k -= 1
+            if not k:
+                return root.val
+            root = root.left
+
 
 if __name__ == "__main__":
     root = TreeNode(5)
