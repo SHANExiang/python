@@ -1,18 +1,25 @@
 
 
 class Solution:
-    def maxSubArray(self, nums) -> int:
-        n, i, j, max_sum, tmp = len(nums), 0, 1, nums[0], nums[0]
-        if n == 1:
-            return nums[0]
-        for i in range(n):
-            for j in range(i+1, n+1):
-                tmp = sum(nums[i:j])
-                if tmp > max_sum:
-                    max_sum = tmp
-        return max_sum
+    def removeElement(self, nums, val: int) -> int:
+        i = 0
+        while i < len(nums):
+            if nums[i] == val:
+                nums.remove(nums[i])
+            else:
+                i += 1
+        return len(nums)
+
+    def remove_element(self, nums, val):
+        left, n = 0, len(nums)
+        for right in range(n):
+            if nums[right] != val:
+                nums[left] = nums[right]
+                left += 1
+        return left
+
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.maxSubArray([-2, 3, 2, 1, -5]))
+    print(solution.remove_element([-2, 3, 2, 1, -5], 2))
