@@ -24,7 +24,7 @@ class TreeNode:
 
 
 class Solution:
-    def buildTree(self, preorder, inorder) -> TreeNode:
+    def buildTree(self, preorder, inorder):
         def recur(pre_root, in_left, in_right):
             if in_left > in_right:
                 return
@@ -37,3 +37,16 @@ class Solution:
         for i in range(len(inorder)):
             dic[inorder[i]] = i
         recur(0, 0, len(inorder) - 1)
+
+    def build_tree(self, preorder, inorder):
+        if not preorder:
+            return
+        node = TreeNode(preorder[0])
+        left_length = inorder.index(preorder[0])
+        left_preorder = preorder[1:left_length + 1]
+        left_inorder = inorder[0:left_length]
+        right_preorder = preorder[left_length + 1:]
+        right_inorder = inorder[left_length + 1:]
+        node.left = self.buildTree(left_preorder, left_inorder)
+        node.right = self.buildTree(right_preorder, right_inorder)
+        return node
