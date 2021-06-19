@@ -31,11 +31,6 @@ class Solution:
         return count
 
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> [python] leetcode+3
 if __name__ == "__main__":
     solution = Solution()
     print(solution.countPrimes2(78))

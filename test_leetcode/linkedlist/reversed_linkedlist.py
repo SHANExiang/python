@@ -33,3 +33,17 @@ class Solution(object):
             cur.next = pre
             return res
         return recur(head, None)
+
+    def reverse_linkedlist4(self, head):
+        if not head:
+            return None
+        if head.next is None:
+            return head
+        node = self.reverse_linkedlist4(head.next)
+        cur = node
+        while cur:
+            if cur.next is None:
+                cur.next = head
+                head.next = None
+            cur = cur.next
+        return node

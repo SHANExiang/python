@@ -25,10 +25,14 @@ class Solution:
                 res.append(lis)
         return res
 
+    def generate2(self, numRows):
+        dp = [[1] * i for i in range(1, numRows + 1)]
+        for i in range(2, numRows):
+            for j in range(1, i):
+                dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]
+        return dp
+
 
 if __name__ == "__main__":
     solution = Solution()
     print(solution.generate(7))
-
-
-
