@@ -21,3 +21,22 @@ class Solution:
                 return False
             return True
         return helper(root)
+
+    # 递归
+    def is_valid_BST(self, root):
+        if not root:
+            return True
+
+        def DFS(root, left, right):
+            if not root:
+                return True
+            return left < root.val < right and DFS(root.left, left, root.val) and DFS(
+                root.right, root.val, right)
+
+        return DFS(root, float('-inf'), float('inf'))
+
+    # 中序遍历
+    def is_valid_BST2(self, root):
+        if not root:
+            return True
+
