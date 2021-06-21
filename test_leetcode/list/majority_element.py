@@ -18,9 +18,33 @@ class Solution:
     def majorityElement2(self, nums) -> int:
         votes = 0
         for num in nums:
-            if votes == 0: x = num
+            if votes == 0:
+                x = num
             votes += 1 if num == x else -1
         return x
+
+    def majorityElement3(self, nums) -> int:
+        n = len(nums)
+        def quick_sort(nums, left, right):
+            if left >= right:
+                return nums
+            i, j = left, right
+            pivot = nums[i]
+            while left < right:
+                while left < right and nums[right] >= pivot:
+                    right -= 1
+                nums[left] = nums[right]
+                while left < right and nums[left] <= pivot:
+                    left += 1
+                nums[right] = nums[left]
+            nums[right] = pivot
+            quick_sort(nums, i, left - 1)
+            quick_sort(nums, left + 1, j)
+            return nums
+
+        nums = quick_sort(nums, 0, n - 1)
+        print(nums)
+        return nums[n // 2]
 
 
 if __name__ == "__main__":
