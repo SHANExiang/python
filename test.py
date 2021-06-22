@@ -1,20 +1,19 @@
 
 
 class Solution:
-    def removeDuplicates(self, nums) -> int:
-        n = len(nums)
-        if n == 0:
-            return 0
-        i, j = 0, 1
-        while i <= j < n:
-            if nums[j] == nums[i]:
-                j += 1
+    def mySqrt(self, x: int) -> int:
+        left, right = 0, x//2+1
+        while left <= right:
+            mid = (right+left)//2
+            if mid*mid == x:
+                return mid
+            elif mid*mid > x:
+                right = mid-1
             else:
-                i += 1
-                nums[i] = nums[j]
-        return i + 1
+                left = mid + 1
+        return right
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.removeDuplicates([0,1,2]))
+    print(solution.mySqrt(0))
