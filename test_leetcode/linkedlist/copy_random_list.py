@@ -28,3 +28,27 @@ class Solution:
             dic[cur].random = dic.get(cur.random)
             cur = cur.next
         return dic[head]
+
+    def copy_random_list(self, head):
+        if not head:
+            return
+        cur = head
+        while cur:
+            node = cur.next
+            tmp = Node(cur.val)
+            cur.next = tmp
+            tmp.next = node
+            cur = cur.next
+        cur = head
+        while cur:
+            cur.next.random = cur.random.next if cur.random is not None else None
+            cur = cur.next.next
+        pre = head
+        cur = res = head.next
+        while cur.next:
+            pre.next = pre.next.next
+            cur.next = cur.next.next
+            pre = pre.next
+            cur = cur.next
+        pre.next = None
+        return res
