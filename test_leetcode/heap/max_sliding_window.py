@@ -80,13 +80,24 @@ class Solution:
             res.append(nums[q[0]])
         return res
 
+    def max_sliding_window2(self, nums, k):
+        from collections import deque
+        n = len(nums)
+        d, res = deque(), []
+        for i, j in zip(range(1-k, n+1-k), range(n)):
+            if i > 0 and d[0] == nums[i - 1]:
+                d.popleft()
+                # 保持 deque 递减
+            while d and d[-1] < nums[j]:
+                d.pop()
+            d.append(nums[j])
+            # 记录窗口最大值
+            if i >= 0:
+                res.append(d[0])
+        return res
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.max_sliding_window([9,10,9,-7,-4,-8,2,-6], 5))
-
-
-
-
+    print(solution.max_sliding_window2([9,10,9,-7,-4,-8,2,-6], 5))
 
