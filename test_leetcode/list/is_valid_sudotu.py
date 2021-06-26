@@ -54,10 +54,29 @@ class Solution:
 
         return True
 
+    def is_valid_sudoku2(self, board):
+        rows = [{} for _ in range(9)]
+        columns = [{} for _ in range(9)]
+        boxes = [{} for _ in range(9)]
+
+        for i in range(9):
+            for j in range(9):
+                num = board[i][j]
+                if num != '.':
+                    num = int(num)
+                    rows[i][num] = rows[i].get(num, 0) + 1
+                    columns[j][num] = columns[j].get(num, 0) + 1
+                    index = (i // 3) * 3 + j // 3
+                    boxes[index][num] = boxes[index].get(num, 0) + 1
+                    if rows[i][num] > 1 or columns[j][num] > 1 or \
+                        boxes[index][num] > 1:
+                        return False
+        return True
+
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.is_valid_sudoku(
+    print(solution.is_valid_sudoku2(
         [[".",".","4",".",".",".","6","3","."],
          [".",".",".",".",".",".",".",".","."],
          ["5",".",".",".",".",".",".","9","."],
