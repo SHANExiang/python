@@ -1,32 +1,29 @@
 
 
+# 1 2 3 (0,0),(0,1),(0,3)
+# 4 5 6 (1,0),(1,1),(1,2)
+# 7 8 9 (2,0),(2,1),(2,2)
+
+
 class Solution:
-    def countAndSay(self, n: int) -> str:
-        dp = ['']*n
-        dp[0] = '1'
-        if n >= 2:
-            dp[1] = '11'
-            for i in range(2, n):
-                x, y, length = 0, 1, len(dp[i-1])
-                tmp = ''
-                while y < length:
-                    if dp[i-1][x] == dp[i-1][y]:
-                        y += 1
-                        if y == length:
-                            tmp += '%s%s' % (y - x, dp[i - 1][x])
-                    else:
-                        tmp += '%s%s' % (y - x, dp[i-1][x])
-                        x = y
-                        y = x + 1
-                        if y == length:
-                            tmp += '%s%s' % (y - x, dp[i - 1][x])
-                dp[i] = tmp
-        return dp[-1]
+    def rotate(self, matrix):
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        n = len(matrix)
+        for j in range(n//2):
+            for i in range(n-1-2*j):
+                tmp1 = matrix[i+j][n-1-j]
+                matrix[i+j][n-1-j] = matrix[j][i+j]
+                tmp2 = matrix[n-1-j][n-1-i-j]
+                matrix[n-1-j][n-1-i-j] = tmp1
+                matrix[j][i+j] = matrix[n-1-i-j][j]
+                matrix[n-1-i-j][j] = tmp2
+        return matrix
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.countAndSay(3))
-
-
-
+    matrix = solution.rotate([[1]])
+    for x in range(len(matrix)):
+        print(matrix[x])
