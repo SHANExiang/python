@@ -33,7 +33,27 @@ class Solution:
             res = 10*res + ord(ch) - ord("0")
         return sign*res
 
-
+    def strToInt2(self, str: str) -> int:
+        str = str.strip()
+        if not str:
+            return 0
+        n = len(str)
+        if str[0] not in ['+', '-'] and not str[0].isdigit():
+            return 0
+        index = 0
+        for i in range(1, n):
+            if str[i].isdigit():
+                index = i
+            else:
+                break
+        if str[0:index+1] in ['-', '+']:
+            return 0
+        res = int(str[0:index+1])
+        if res > (pow(2, 31) - 1):
+            return pow(2, 31) - 1
+        if res < -pow(2, 31):
+            return pow(-2, 31)
+        return res
 
 
 if __name__ == "__main__":

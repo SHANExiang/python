@@ -21,3 +21,35 @@ class Solution:
             A = A.next if A else headB
             B = B.next if B else headA
         return A
+
+    def getIntersectionNode2(self, headA: ListNode, headB: ListNode) -> ListNode:
+        len_A, len_B = 0, 0
+        cur_A, cur_B = headA, headB
+        while cur_A:
+            len_A += 1
+            cur_A = cur_A.next
+        while cur_B:
+            len_B += 1
+            cur_B = cur_B.next
+        if len_B >= 1 and len_A >= 1:
+            diff = len_A - len_B
+            if diff == 0:
+                cur_A, cur_B = headA, headB
+            elif diff > 0:
+                while diff > 0:
+                    cur_A = headA.next
+                    headA = headA.next
+                    diff -= 1
+                cur_B = headB
+            else:
+                while diff < 0:
+                    cur_B = headB.next
+                    headB = headB.next
+                    diff += 1
+                cur_A = headA
+            while cur_A:
+                if cur_A is cur_B:
+                    return cur_A
+                cur_A = cur_A.next
+                cur_B = cur_B.next
+        return None
