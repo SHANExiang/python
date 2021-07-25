@@ -1,18 +1,18 @@
 class Solution:
-    def translateNum(self, num: int) -> int:
-        s = str(num)
-        n = len(s)
-        dp = [0] * (n + 1)
-        dp[0], dp[1] = 1, 1
-        for i in range(2, n+1):
-            if s[i - 2:i] > '25' or s[i - 2:i] < '10':
-                dp[i] = dp[i - 1]
-            else:
-                dp[i] = dp[i - 2] + dp[i - 1]
-            print(dp[i])
-        return dp[-1]
+    def matrixReshape(self, mat, r: int, c: int):
+        m, n = len(mat), len(mat[0])
+        if m * n != r * c:
+            return mat
+        tmp = list()
+        for i in range(m):
+            for j in range(n):
+                tmp.append(mat[i][j])
+        res = list()
+        for i in range(r):
+            res.append(tmp[c*i:c*i+c])
+        return res
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.translateNum(18822))
+    print(solution.matrixReshape([[1,2],[3,4]], 4, 1))
