@@ -16,21 +16,18 @@
 
 class Solution:
     def maxValue(self, grid):
-        m = len(grid[0])
-        n = len(grid)
-        dp = [[0]*m for _ in range(n)]
-        for i in range(n):
-            for j in range(m):
+        m, n = len(grid), len(grid[0])
+        dp = [[0] * n for _ in range(m)]
+        for i in range(m):
+            for j in range(n):
                 if i == j == 0:
-                    dp[i][j] = grid[0][0]
-                else:
-                    if i - 1 >= 0 and j - 1 < 0:
-                        dp[i][j] = dp[i - 1][j] + grid[i][j]
-                    if j - 1 >= 0 and i - 1 < 0:
-                        dp[i][j] = dp[i][j - 1] + grid[i][j]
-                    if i - 1 >= 0 and j - 1 >= 0:
-                        dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]
-        return dp[n - 1][m - 1]
+                    dp[i][j] = grid[i][j]
+                if i - 1 < 0:
+                    dp[i - 1][j] = 0
+                if j - 1 < 0:
+                    dp[i][j - 1] = 0
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]
+        return dp[-1][-1]
 
     # 就地修改
     def maxValue2(self, grid) -> int:
