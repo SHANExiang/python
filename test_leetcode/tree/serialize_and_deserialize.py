@@ -1,4 +1,4 @@
-
+from collections import deque
 # 请实现两个函数，分别用来序列化和反序列化二叉树。
 #
 # 示例:
@@ -33,7 +33,6 @@ class Codec:
         if not root:
             return "[]"
         res = list()
-        from collections import deque
         queue = deque()
         queue.append(root)
         while queue:

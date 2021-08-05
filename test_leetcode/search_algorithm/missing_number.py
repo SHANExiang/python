@@ -30,6 +30,14 @@ class Solution:
                 right = mid - 1
         return left
 
+    def missingNumber2(self, nums) -> int:
+        i, n = 0, len(nums)
+        while i < n:
+            if nums[i] != i:
+                return i
+            i += 1
+        return n
+
 
 if __name__ == "__main__":
     solution = Solution()

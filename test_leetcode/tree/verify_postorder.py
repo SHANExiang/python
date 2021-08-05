@@ -19,6 +19,7 @@
 
 
 class Solution:
+
     def verifyPostorder(self, postorder) -> bool:
         def recur(left, right):
             if left >= right:
