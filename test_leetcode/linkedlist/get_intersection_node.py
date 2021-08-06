@@ -53,3 +53,25 @@ class Solution:
                 cur_A = cur_A.next
                 cur_B = cur_B.next
         return None
+
+    def getIntersectionNode3(self, headA: ListNode, headB: ListNode) -> ListNode:
+        cur1, cur2 = headA, headB
+        while cur1 != cur2:
+            cur1 = cur1.next if cur1 else headB
+            cur2 = cur2.next if cur2 else headA
+        return cur1
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    head1 = ListNode(2)
+    node1 = ListNode(6)
+    node2 = ListNode(4)
+    head1.next = node1
+    node1.next = node2
+
+    head2 = ListNode(1)
+    node3 = ListNode(5)
+    head2.next = node3
+    print(solution.getIntersectionNode3(head1, head2))
+
