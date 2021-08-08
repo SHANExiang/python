@@ -24,7 +24,16 @@ class Solution:
             dp[i][1] = max(dp[i-1][0] - prices[i], dp[i-1][1])
         return dp[n-1][0]
 
+    def max_profit2(self, prices):
+        n = len(prices)
+        i, res = 1, 0
+        while i < n:
+            res += max(0, prices[i] - prices[i-1])
+            i += 1
+        return res
+
 
 if __name__ == "__main__":
     solution = Solution()
     print(solution.maxProfit(prices=[7,1,5,3,6,4]))
+    print(solution.max_profit2(prices=[7,1,5,3,6,4]))

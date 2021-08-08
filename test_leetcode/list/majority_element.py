@@ -25,6 +25,7 @@ class Solution:
 
     def majorityElement3(self, nums) -> int:
         n = len(nums)
+
         def quick_sort(nums, left, right):
             if left >= right:
                 return nums

@@ -1,15 +1,28 @@
 
 
+# [1,  2, 3,  4]
+# [5,  6, 7,  8]
+# [9, 10, 11, 12]
+
 class Solution:
-    def singleNumber(self, nums) -> int:
-        from collections import Counter
-        counter = Counter(nums)
-        for key, value in counter.items():
-            if value == 1:
-                return key
-        return -1
+    def rotate(self, nums, k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        count, start, origin = 0, 0, nums[0]
+        while count < n:
+            if start + k <= n - 1:
+                next = start + k
+            else:
+                next = (start + k) % n
+            origin, nums[next] = nums[next], origin
+            start = next
+            count += 1
+        print(nums)
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.singleNumber([9,1,7,9,7,9,7]))
+    print(solution.rotate([1,2,3,4,5,6,7], 3))
+    print(solution.rotate([-1,-100,3,99], 2))
