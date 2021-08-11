@@ -1,28 +1,24 @@
+from collections import Counter
 
-
-# [1,  2, 3,  4]
-# [5,  6, 7,  8]
-# [9, 10, 11, 12]
 
 class Solution:
-    def rotate(self, nums, k: int) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
-        n = len(nums)
-        count, start, origin = 0, 0, nums[0]
-        while count < n:
-            if start + k <= n - 1:
-                next = start + k
+    def isPalindrome(self, s: str) -> bool:
+        n = len(s)
+        left, right = 0, n - 1
+        while left < right:
+            if not s[left].isdigit() and not s[left].isalpha():
+                left += 1
+            elif not s[right].isdigit() and not s[right].isalpha():
+                right -= 1
             else:
-                next = (start + k) % n
-            origin, nums[next] = nums[next], origin
-            start = next
-            count += 1
-        print(nums)
+                if s[left].lower() == s[right].lower():
+                    left += 1
+                    right -= 1
+                else:
+                    return False
+        return True
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.rotate([1,2,3,4,5,6,7], 3))
-    print(solution.rotate([-1,-100,3,99], 2))
+    print(solution.isPalindrome("Aman, n plan, a canal: Panama"))

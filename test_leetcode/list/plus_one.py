@@ -20,6 +20,25 @@ class Solution:
                 digits[-1] = 0
                 return self.plus_one(digits[:-1]) + [digits[-1]]
 
+    def plusOne(self, digits):
+        n, plus = len(digits), 1
+        right = n - 1
+        while right >= 0:
+            s = digits[right] + plus
+            if s >= 10:
+                plus = 1
+                digits[right] = 0
+            else:
+                plus = 0
+                digits[right] = s
+                break
+            right -= 1
+        if plus == 0:
+            return digits
+        res = [1]
+        res.extend(digits)
+        return res
+
 
 if __name__ == "__main__":
     solution = Solution()

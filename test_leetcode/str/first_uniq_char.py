@@ -22,6 +22,29 @@ class Solution:
                 return i
         return -1
 
+    def first_uniq_char2(self, s):
+        from collections import Counter
+        frequency = Counter(s)
+        for i, ch in enumerate(s):
+            if frequency[ch] == 1:
+                return i
+        return -1
+
+    def first_uniq_char3(self, s: str) -> int:
+        n = len(s)
+        dic = dict()
+        from collections import deque
+        queue = deque()
+        for index, ch in enumerate(s):
+            if ch not in dic:
+                dic[ch] = index
+                queue.append((ch, index))
+            else:
+                dic[ch] = -1
+                while queue and dic[queue[0][0]] == -1:
+                    queue.popleft()
+        return -1 if not queue else queue[0][1]
+
 
 if __name__ == "__main__":
     solution = Solution()

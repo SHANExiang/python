@@ -19,18 +19,11 @@ class Solution(object):
     def str_str(self, haystack, needle):
         if not needle:
             return 0
-        left = 0
-        while left < len(haystack):
-            if haystack[left] == needle[0]:
-                if len(needle) == 1:
-                    return left
-                if left + len(needle) - 1 < len(haystack) and \
-                        needle == haystack[left:left+len(needle)]:
-                    return left
-                else:
-                    left += 1
-            else:
-                left += 1
+        i, n = 0, len(needle)
+        while i + n <= len(haystack):
+            if needle == haystack[i:i + n]:
+                return i
+            i += 1
         return -1
 
 

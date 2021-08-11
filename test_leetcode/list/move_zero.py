@@ -35,6 +35,15 @@ class Solution:
                 left += 1
                 right += 1
 
+    def move_zero2(self, nums):
+        index, cur = 0, 0
+        while cur < len(nums):
+            if nums[cur] != 0:
+                nums[index], nums[cur] = nums[cur], nums[index]
+                index += 1
+            cur += 1
+        print(nums)
+
 
 if __name__ == "__main__":
     nums = [0, 0, 0, 1, 0]

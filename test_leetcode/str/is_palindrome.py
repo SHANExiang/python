@@ -31,7 +31,7 @@ class Solution(object):
                 return False
         return True
 
-    def is_palindrome2(self):
+    def is_palindrome2(self, s):
         import re
         result_list = re.findall("[A-Za-z0-9]", s, re.IGNORECASE)
         print(result_list)

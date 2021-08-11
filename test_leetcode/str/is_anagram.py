@@ -19,14 +19,8 @@ import collections
 # 排序后相等即可
 class Solution(object):
     def is_anagram(self, s, t):
-        if len(s) != len(t):
-            return False
-        s = collections.Counter(s)
-        t = collections.Counter(t)
-        if s == t:
-            return True
-        else:
-            return False
+        from collections import Counter
+        return Counter(s) == Counter(t)
 
 
 if __name__ == "__main__":
