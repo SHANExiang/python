@@ -1,24 +1,23 @@
 from collections import Counter
 
-
 class Solution:
-    def isPalindrome(self, s: str) -> bool:
-        n = len(s)
-        left, right = 0, n - 1
-        while left < right:
-            if not s[left].isdigit() and not s[left].isalpha():
-                left += 1
-            elif not s[right].isdigit() and not s[right].isalpha():
-                right -= 1
+    def longestCommonPrefix(self, strs) -> str:
+        n, res = len(strs), ''
+        if n == 1:
+            return strs[0]
+        n_min = min([len(str) for str in strs])
+        if n_min == 0:
+            return ''
+        i = 0
+        while i < n_min:
+            if all([str[i] == strs[0][i] for str in strs]):
+                res += strs[0][i]
+                i += 1
             else:
-                if s[left].lower() == s[right].lower():
-                    left += 1
-                    right -= 1
-                else:
-                    return False
-        return True
+                break
+        return res
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.isPalindrome("Aman, n plan, a canal: Panama"))
+    print(solution.longestCommonPrefix(["dog","racecar","car"]))

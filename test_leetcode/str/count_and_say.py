@@ -51,12 +51,27 @@ class Solution(object):
                         result += '%s%s' % (count, origin_str[left])
             return result
 
+    def countAndSay(self, n: int) -> str:
+        s = '1'
+        while n > 1:
+            length = len(s)
+            start, cur = 0, 0
+            count, next = 0, ''
+            while cur < length:
+                if s[start] == s[cur]:
+                    count += 1
+                    cur += 1
+                else:
+                    next += '%s%s' % (count, s[start])
+                    start = cur
+                    count = 0
+                if cur == length:
+                    next += '%s%s' % (count, s[start])
+            s = next
+            n -= 1
+        return s
+
 
 if __name__ == '__main__':
     solution = Solution()
     print(solution.count_and_say(2))  # 13112221
-
-
-
-
-
