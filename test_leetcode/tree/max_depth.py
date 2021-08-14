@@ -28,3 +28,21 @@ class Solution:
             queue = tmp
             res += 1
         return res
+
+    def maxDepth3(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        from collections import deque
+        queue = deque()
+        queue.append(root)
+        count = 0
+        while queue:
+            length = len(queue)
+            for _ in range(length):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            count += 1
+        return count

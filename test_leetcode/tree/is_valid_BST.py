@@ -37,6 +37,14 @@ class Solution:
 
     # 中序遍历
     def is_valid_BST2(self, root):
-        if not root:
-            return True
-
+        stack, inorder = list(), float('-inf')
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            if root.val <= inorder:
+                return False
+            inorder = root.val
+            root = root.right
+        return True
