@@ -15,21 +15,23 @@ class TreeNode:
 
 
 class Solution:
-    def sortedArrayToBST(self, nums) -> TreeNode:
-        n = len(nums)
-        left_index, right_index = 0, n - 1
-
-        def recur(left, right):
-            if left > right:
-                return
-            mid = (right + left)//2
-            root = TreeNode(nums[mid])
-            root.left = recur(left, mid-1)
-            root.right = recur(mid+1, right)
-            return root
-        return recur(left_index, right_index)
+    def romanToInt(self, s: str) -> int:
+        map = {'M': 1000, 'CM': 900, 'D': 500, 'CD': 400, 'C': 100, 'XC': 90, 'L': 50,
+               'XL': 40, 'X': 10, 'IX': 9, 'V': 5, 'IV': 4, 'I': 1}
+        left, n = 0, len(s)
+        res = 0
+        while left <= n - 1:
+            if left + 1 < n:
+                if s[left:left+2] in map:
+                    res += map[s[left:left+2]]
+                    left += 2
+                    continue
+            if s[left] in map:
+                res += map[s[left]]
+                left += 1
+        return res
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.sortedArrayToBST([-10,-3,0,5,9]))
+    print(solution.romanToInt('III'))

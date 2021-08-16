@@ -19,7 +19,7 @@ class Solution:
 
     # 使用标准的 埃拉托斯特尼 埃氏筛选法
     def countPrimes2(self, n: int) -> int:
-        isNumPrimes = [True] * n  # 将所有数，展开所有数 标记质数真
+        isNumPrimes = [True] * n  # 将所有数，展开所有数标记质数真
         count = 0  # 质数计数器 因为1不是质数 所以 0
         # 遍历2，n 数，判断是否是质数，从2开始对应-质数3 [1,2,3]  1不算质数
         for i in range(2, n):
