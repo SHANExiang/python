@@ -13,25 +13,30 @@ class TreeNode:
         self.left = left
         self.right = right
 
-
+# [-4, -1, -1, 0, 1, 2]
 class Solution:
-    def romanToInt(self, s: str) -> int:
-        map = {'M': 1000, 'CM': 900, 'D': 500, 'CD': 400, 'C': 100, 'XC': 90, 'L': 50,
-               'XL': 40, 'X': 10, 'IX': 9, 'V': 5, 'IV': 4, 'I': 1}
-        left, n = 0, len(s)
-        res = 0
-        while left <= n - 1:
-            if left + 1 < n:
-                if s[left:left+2] in map:
-                    res += map[s[left:left+2]]
-                    left += 2
-                    continue
-            if s[left] in map:
-                res += map[s[left]]
-                left += 1
+    def threeSum(self, nums):
+        n = len(nums)
+        if n < 3:
+            return list()
+        res = []
+        nums.sort()
+        for index, num in enumerate(nums):
+            left, right = index + 1, n - 1
+            while left < right:
+                if nums[left] + nums[right] == -num:
+                    temp = [num, nums[left], nums[right]]
+                    if temp not in res:
+                        res.append(temp)
+                    left += 1
+                    right -= 1
+                elif nums[left] + nums[right] + num < 0:
+                    left += 1
+                else:
+                    right -= 1
         return res
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.romanToInt('III'))
+    print(solution.threeSum([-1,0,1,2,-1,-4]))

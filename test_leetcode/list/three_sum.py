@@ -49,6 +49,27 @@ class Solution:
                     left += 1
         return res
 
+    def threeSum3(self, nums):
+        n = len(nums)
+        if n < 3:
+            return list()
+        res = []
+        nums.sort()
+        for index, num in enumerate(nums):
+            left, right = index + 1, n - 1
+            while left < right:
+                if nums[left] + nums[right] == -num:
+                    temp = [num, nums[left], nums[right]]
+                    if temp not in res:
+                        res.append(temp)
+                    left += 1
+                    right -= 1
+                elif nums[left] + nums[right] + num < 0:
+                    left += 1
+                else:
+                    right -= 1
+        return res
+
 
 if __name__ == "__main__":
     solution = Solution()
