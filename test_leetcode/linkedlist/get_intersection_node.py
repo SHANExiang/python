@@ -54,12 +54,18 @@ class Solution:
                 cur_B = cur_B.next
         return None
 
+    # 哈希表
     def getIntersectionNode3(self, headA: ListNode, headB: ListNode) -> ListNode:
-        cur1, cur2 = headA, headB
-        while cur1 != cur2:
-            cur1 = cur1.next if cur1 else headB
-            cur2 = cur2.next if cur2 else headA
-        return cur1
+        seen = set()
+        while headA:
+            seen.add(headA)
+            headA = headA.next
+        temp = headB
+        while temp:
+            if temp in seen:
+                return temp
+            temp = temp.next
+        return None
 
 
 if __name__ == "__main__":
@@ -73,5 +79,4 @@ if __name__ == "__main__":
     head2 = ListNode(1)
     node3 = ListNode(5)
     head2.next = node3
-    print(solution.getIntersectionNode3(head1, head2))
-
+    print(solution.getIntersectionNode(head1, head2))

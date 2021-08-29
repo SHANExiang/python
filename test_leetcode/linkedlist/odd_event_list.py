@@ -46,19 +46,36 @@ class Solution:
             cur.next = event_cur
         return head
 
+    def oddEvenList2(self, head: ListNode) -> ListNode:
+        pre = odd = ListNode(0)
+        event = cur = ListNode(0)
+        while head:
+            odd.next = head
+            odd = odd.next
+            cur.next = head.next
+            if cur.next:
+                cur = cur.next
+            head = head.next
+            if head:
+                head = head.next
+            else:
+                break
+        odd.next = event.next
+        return pre.next
+
 
 if __name__ == "__main__":
-    # node7 = ListNode(7)
-    # node6 = ListNode(4, node7)
-    # node5 = ListNode(6, node6)
-    # node4 = ListNode(5, node5)
-    # node3 = ListNode(3, node4)
-    node2 = ListNode(1, None)
+    node7 = ListNode(7)
+    node6 = ListNode(4, node7)
+    node5 = ListNode(6, node6)
+    node4 = ListNode(5, node5)
+    node3 = ListNode(3, node4)
+    node2 = ListNode(1, node3)
     head = ListNode(2, node2)
 
     #  2->1->3->5->6->4->7-null
     solution = Solution()
-    head = solution.oddEvenList(head)
+    head = solution.oddEvenList2(head)
     while head:
         print(head.val)
         head = head.next
