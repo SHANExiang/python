@@ -23,11 +23,11 @@
 
 
 class Solution:
-    def subsets(self, nums):
+    def sub_sets1(self, nums):
         n = len(nums)
         if n == 1:
             return [[], [nums[0]]]
-        tmp = self.subsets(nums[1:])
+        tmp = self.sub_sets1(nums[1:])
         import copy
         res = copy.deepcopy(tmp)
         for ele in tmp:
@@ -35,14 +35,14 @@ class Solution:
             res.append(ele)
         return res
 
-    def sub_sets1(self, nums):
+    def sub_sets2(self, nums):
         res = [[]]
         for i in nums:
             res += [[i] + num for num in res]
         return res
 
-    # BFS 实际同sub_sets1
-    def sub_sets2(self, nums):
+    # BFS 实际同sub_sets2
+    def sub_sets3(self, nums):
         res = [[]]
         for i in range(len(nums)):
             for j in range(len(res)):
@@ -50,9 +50,10 @@ class Solution:
         return res
 
     # 回溯
-    def sub_sets3(self, nums):
+    def sub_sets4(self, nums):
         self.res = []
         path, n = [], len(nums)
+
         def backtrack(startindex):
             self.res.append(path[:])
             if startindex >= n:
@@ -67,4 +68,4 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.sub_sets3([1,2,3]))
+    print(solution.sub_sets1([1,2,3]))

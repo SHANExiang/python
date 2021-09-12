@@ -10,26 +10,31 @@
 
 class Solution:
     def exist(self, board, word: str) -> bool:
+        m, n = len(board), len(board[0])
         length = len(word)
-        m = len(board)
-        n = len(board[0])
-        def dfs(cur, i, j):
-            if cur >= length:
-                return False
-            if i >= m or i < 0 or j >= n or j < 0:
-                return False
-            if cur == length - 1:
+        path = []
+
+        def back_track(i, j, depth, path):
+            if depth == length:
                 return True
-            if board[i][j] != word[cur]:
+            if 0 > i or i >= m or 0 > j or j >= n or (i, j) in path or \
+                    board[i][j] != word[depth]:
                 return False
-            tmp = board[i][j]
-            board[i][j] = '.'
-            res = dfs(cur+1, i+1, j) or dfs(cur+1, i-1, j) or dfs(cur+1, i, j+1) or dfs(cur+1, i, j-1)
-            board[i][j] = tmp
-            return res
+            path.append((i, j))
+            for x, y in [(i + 1, j), (i - 1, j), (i, j - 1), (i, j + 1)]:
+                if back_track(x, y, depth + 1, path):
+                    return True
+            path.pop()
+            return False
+
         for i in range(m):
             for j in range(n):
-                if dfs(0, i, j):
+                if back_track(i, j, 0, path):
                     return True
         return False
 
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]],
+                         'ABCB'))

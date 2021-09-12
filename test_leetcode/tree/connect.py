@@ -51,3 +51,23 @@ class Solution:
         self.connect2(root.left)
         self.connect2(root.right)
         return root
+
+    def connect3(self, root):
+        if not root:
+            return None
+        from collections import deque
+        queue = deque()
+        queue.append(root)
+        while queue:
+            length = len(queue)
+            for i in range(length):
+                node = queue.popleft()
+                if i == length - 1:
+                    node.next = None
+                else:
+                    node.next = queue[0]
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return root

@@ -1,6 +1,10 @@
 
 
-#
+# 给定一个包含红色、白色和蓝色，一共n 个元素的数组，原地对它们进行排序，
+# 使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+
+# 此题中，我们使用整数 0、1 和 2 分别表示红色、白色和蓝色。
+
 
 class Solution:
     def sortColors(self, nums) -> None:
@@ -32,6 +36,7 @@ class Solution:
     def sort_color(self, nums):
         n = len(nums)
         left, right = 0, n - 1
+
         def quick_sort(nums, left, right):
             if left > right:
                 return
@@ -63,12 +68,21 @@ class Solution:
                 p0 += 1
                 p1 += 1
 
-
-
-
-
+    def sort_color3(self, nums):
+        n = len(nums)
+        red, blue = 0, n - 1
+        cur = 0
+        while cur < n:
+            while cur < blue and nums[cur] == 2:
+                nums[cur], nums[blue] = nums[blue], nums[cur]
+                blue -= 1
+            if nums[cur] == 0:
+                nums[red], nums[cur] = nums[cur], nums[red]
+                red += 1
+            cur += 1
+        print(nums)
 
 
 if __name__ == "__main__":
     solution = Solution()
-    solution.sort_color([0, 1, 0, 2])
+    solution.sort_color3([0, 1, 0, 2])

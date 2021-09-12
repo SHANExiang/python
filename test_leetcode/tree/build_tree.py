@@ -36,7 +36,7 @@ class Solution:
         dic = dict()
         for i in range(len(inorder)):
             dic[inorder[i]] = i
-        recur(0, 0, len(inorder) - 1)
+        return recur(0, 0, len(inorder) - 1)
 
     def build_tree(self, preorder, inorder):
         if not preorder:
