@@ -44,10 +44,30 @@ class Solution:
                 y = j
         return [x, y]
 
+    #  先找>=target的第一个
+    #  再找>target的第一个
+    def search_range2(self, nums, target):
+        def search(nums, target):
+            n = len(nums)
+            left, right = 0, n - 1
+            while left <= right:
+                mid = (left + right) // 2
+                if nums[mid] >= target:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            return left
+        if not nums:
+            return [-1, -1]
+        n = len(nums)
+        left = search(nums, target)
+        right = search(nums, target+1)
+        if left == n or nums[left] != target:
+            return [-1, -1]
+        else:
+            return [left, right - 1]
+
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.searchRange([5,7,7,8,8,10], 6))
-
-
-
+    print(solution.search_range2([1, 1], 1))

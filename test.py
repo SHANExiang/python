@@ -14,32 +14,31 @@ class TreeNode:
         self.left = left
         self.right = right
 
+
 class Solution:
-    def sortColors(self, nums) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
-        n = len(nums)
-        red, blue = 0, n - 1
-        cur = 0
-        while cur < n and blue > cur:
-            if nums[cur] == 0:
-                if nums[red] != 0:
-                    nums[cur], nums[red] = nums[red], nums[cur]
-                else:
-                    cur += 1
-                red += 1
-            elif nums[cur] == 2:
-                if nums[blue] != 2:
-                    nums[cur], nums[blue] = nums[blue], nums[cur]
-                else:
-                    cur += 1
-                blue -= 1
-            else:
-                cur += 1
-        print(nums)
+    def coinChange(self, coins, amount: int) -> int:
+        res = float('inf')
+
+        def dfs(index, path):
+            if sum(path) > amount:
+                return
+            elif sum(path) == amount:
+                print(path)
+                nonlocal res
+                if len(path) < res:
+                    res = len(path)
+                return
+            path.append(coins[index])
+            for i in range(len(coins)):
+                import copy
+                p = copy.deepcopy(path)
+                dfs(i, p)
+                p.pop()
+        path = []
+        dfs(0, path)
+        return int(res)
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.sortColors([2,0,1]))
+    print(solution.coinChange([1, 2, 5], 11))

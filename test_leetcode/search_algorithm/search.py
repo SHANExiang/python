@@ -17,6 +17,7 @@ class Solution:
             if i + 1 < n and nums[i] > nums[i+1]:
                 index = i
                 break
+
         def binary_search(nums, left, right):
             while left <= right:
                 mid = (left + right) // 2
@@ -57,4 +58,4 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.search([4,], 4))
+    print(solution.search2([5, 1, 3], 3))
