@@ -16,29 +16,27 @@ class TreeNode:
 
 
 class Solution:
-    def coinChange(self, coins, amount: int) -> int:
-        res = float('inf')
-
-        def dfs(index, path):
-            if sum(path) > amount:
-                return
-            elif sum(path) == amount:
-                print(path)
-                nonlocal res
-                if len(path) < res:
-                    res = len(path)
-                return
-            path.append(coins[index])
-            for i in range(len(coins)):
-                import copy
-                p = copy.deepcopy(path)
-                dfs(i, p)
-                p.pop()
-        path = []
-        dfs(0, path)
-        return int(res)
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        cur = ListNode(0)
+        cur.next = head
+        pre = cur
+        while cur:
+            if cur.next and val == cur.next.val:
+                cur.next = cur.next.next
+            else:
+                cur = cur.next
+        return pre.next
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.coinChange([1, 2, 5], 11))
+    node4 = ListNode(7)
+    node3 = ListNode(7)
+    node2 = ListNode(7)
+    node1 = ListNode(7)
+    head = ListNode(7)
+    head.next = node1
+    node1.next = node2
+    node2.next = node3
+    node3.next = node4
+    print(solution.removeElements(head, 7))

@@ -61,6 +61,17 @@ class Solution1:
             pre.next = cur.next
         return head
 
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        cur = ListNode(0)
+        cur.next = head
+        pre = cur
+        while cur:
+            if cur.next and val == cur.next.val:
+                cur.next = cur.next.next
+            else:
+                cur = cur.next
+        return pre.next
+
 
 if __name__ == '__main__':
     node = ListNode(2)
