@@ -16,27 +16,21 @@ class TreeNode:
 
 
 class Solution:
-    def removeElements(self, head: ListNode, val: int) -> ListNode:
-        cur = ListNode(0)
-        cur.next = head
-        pre = cur
-        while cur:
-            if cur.next and val == cur.next.val:
-                cur.next = cur.next.next
-            else:
-                cur = cur.next
-        return pre.next
+    def isHappy(self, n: int) -> bool:
+        seen = set()
+        while n != 1:
+            if n in seen:
+                return False
+            seen.add(n)
+            tmp = 0
+            while n > 0:
+                a = n % 10
+                tmp += a * a
+                n //= 10
+            n = tmp
+        return True
 
 
 if __name__ == "__main__":
     solution = Solution()
-    node4 = ListNode(7)
-    node3 = ListNode(7)
-    node2 = ListNode(7)
-    node1 = ListNode(7)
-    head = ListNode(7)
-    head.next = node1
-    node1.next = node2
-    node2.next = node3
-    node3.next = node4
-    print(solution.removeElements(head, 7))
+    print(solution.isHappy(2))
