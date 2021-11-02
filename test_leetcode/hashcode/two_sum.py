@@ -17,9 +17,17 @@ class Solution:
                 else:
                     j += 1
 
+    def two_sum2(self, nums, target):
+        dic = dict()
+        for index, num in enumerate(nums):
+            if target - num not in dic:
+                dic[num] = index
+            else:
+                return [index, dic[target - num]]
+
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.two_sum([11, 7, 11, 2], 9))
+    print(solution.two_sum2([11, 7, 11, 2], 9))
 
 

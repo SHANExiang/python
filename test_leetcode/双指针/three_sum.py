@@ -70,6 +70,26 @@ class Solution:
                     right -= 1
         return res
 
+    def two_sum(self, start, nums, target):
+        dic = dict()
+        res = []
+        for index, num in enumerate(nums):
+            if target - num not in dic:
+                dic[num] = index
+            else:
+                res.append([start + dic[target - num], start + index])
+        return res
+
+    # 获取索引列表
+    def threeSum4(self, nums):
+        res = []
+        for index, num in enumerate(nums):
+            idx = self.two_sum(index + 1, nums[index+1:], 0 - num)
+            for l in idx:
+                l.append(index)
+            res.extend(idx)
+        return res
+
 
 if __name__ == "__main__":
     solution = Solution()
