@@ -96,6 +96,18 @@ class Solution:
                 res.append(d[0])
         return res
 
+    # 超时
+    def max_sliding_window3(self, nums, k):
+        n = len(nums)
+        res = [0 for _ in range(n - k + 1)]
+        res[0] = max(nums[0:k])
+        for i in range(1, n - k + 1):
+            if nums[i - 1] == res[i - 1]:
+                res[i] = max(nums[i:i + k])
+            else:
+                res[i] = max(res[i - 1], nums[i + k - 1])
+        return res
+
 
 if __name__ == "__main__":
     solution = Solution()

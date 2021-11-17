@@ -15,23 +15,38 @@ class TreeNode:
         self.right = right
 
 
+class MyQueue(object):
+    def __init__(self):
+        self.queue = []
+
+    def push(self, value):
+        while self.queue and value > self.queue[-1]:
+            self.queue.pop()
+        self.queue.append(value)
+
+    def pop(self, value):
+        if self.queue and value == self.queue[0]:
+            self.queue.pop(0)
+
+    def front(self):
+        return self.queue[0]
+
+
 class Solution:
-    def isValid(self, s: str) -> bool:
-        map = {')': '(', '}': '{', ']': '['}
-        stack = []
-        for ch in s:
-            if not stack and ch in map:
-                return False
-            if ch in map.values():
-                stack.append(ch)
-            else:
-                if map.get(ch) == stack[-1]:
-                    stack.pop()
-                else:
-                    return False
-        return len(stack) == 0
+    def maxSlidingWindow(self, nums, k: int):
+        queue = MyQueue()
+        res, n = list(), len(nums)
+        for i in range(0, k):
+            queue.push(nums[i])
+        res.append(queue.front())
+        for i in range(k, n):
+            queue.pop(nums[i-k])
+            queue.push(nums[i])
+            res.append(queue.front())
+        return res
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.isValid('(})'))
+    print(solution.maxSlidingWindow([-7,-8,7,5,7,1,6,0], 4))
+    l = sorted(dict(Counter([-7,-8,7,5,7,1,6,0])).items(), key=lambda x: x[0])
