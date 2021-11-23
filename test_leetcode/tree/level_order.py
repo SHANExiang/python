@@ -27,25 +27,23 @@ class TreeNode:
 
 
 class Solution:
-    def levelOrder(self, root: TreeNode):
-        if not root:
-            return []
+    # 递归法
+    def level_order1(self, root: TreeNode):
         res = []
-        queue = [root]
-        while queue:
-            tmp_value_list = list()
-            tmp = []
-            for node in queue:
-                tmp_value_list.append(node.val)
-                if node.left:
-                    tmp.append(node.left)
-                if node.right:
-                    tmp.append(node.right)
-            res.append(tmp_value_list)
-            queue = tmp
+        def helper(root, depth):
+            if not root:
+                return []
+            if len(res) == depth: res.append([])
+            res[depth].append(root.val)
+            if root.left:
+                helper(root.left, depth + 1)
+            if root.right:
+                helper(root.right, depth + 1)
+        helper(root, 0)
         return res
 
-    def level_order(self, root):
+    # 迭代法
+    def level_order2(self, root):
         if not root:
             return []
         import collections
